@@ -97,21 +97,20 @@ const trips = (await getCollection('trips'))
         </ul>
       </div>
 
-      <!-- Col 3: Layanan -->
+      <!-- Col 3: Menu -->
       <div>
-        <h4 class="text-white font-bold text-base mb-5">Layanan</h4>
+        <h4 class="text-white font-bold text-base mb-5">Menu</h4>
         <ul class="space-y-3">
           {[
-            'Field Learning',
-            'Workshop Eksklusif',
-            'Dialog Terbuka',
-            'City Tour Edukatif',
-            'Networking Praktisi',
+            { label: 'Beranda', href: '/' },
+            { label: 'Agenda',  href: '/#agenda' },
+            { label: 'Why Us',  href: '/#why' },
+            { label: 'Pricing', href: '/#pricing' },
           ].map((item) => (
             <li>
-              <a href="/#layanan" class="flex items-center gap-2 text-gray-400 hover:text-white transition-colors text-sm">
+              <a href={item.href} class="flex items-center gap-2 text-gray-400 hover:text-white transition-colors text-sm">
                 <span class="text-jaga-orange text-xs" aria-hidden="true">▪</span>
-                {item}
+                {item.label}
               </a>
             </li>
           ))}
@@ -142,7 +141,7 @@ const trips = (await getCollection('trips'))
             <svg class="w-4 h-4 mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
             </svg>
-            <span>Jakarta, Indonesia</span>
+            <span>Semarang, Indonesia</span>
           </li>
         </ul>
 
