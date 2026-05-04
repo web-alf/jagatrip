@@ -4,16 +4,18 @@ import Nav from '../components/layout/Nav.astro';
 import Footer from '../components/layout/Footer.astro';
 import FloatingWA from '../components/layout/FloatingWA.astro';
 
-import HomeHero          from '../components/sections/home/HomeHero.astro';
-import ProblemSection    from '../components/sections/home/ProblemSection.astro';
-import AboutSection      from '../components/sections/home/AboutSection.astro';
-import WhySection        from '../components/sections/home/WhySection.astro';
-import BenefitSection    from '../components/sections/home/BenefitSection.astro';
+import HomeHero           from '../components/sections/home/HomeHero.astro';
+import ProblemSection     from '../components/sections/home/ProblemSection.astro';
+import AboutSection       from '../components/sections/home/AboutSection.astro';
+import AudienceSection    from '../components/sections/home/AudienceSection.astro';
+import WhySection         from '../components/sections/home/WhySection.astro';
+import BenefitSection     from '../components/sections/home/BenefitSection.astro';
+import TimelineSection    from '../components/sections/home/TimelineSection.astro';
+import IncludesSection    from '../components/sections/home/IncludesSection.astro';
+import PricingSection     from '../components/sections/home/PricingSection.astro';
+import CtaBannerSection   from '../components/sections/home/CtaBannerSection.astro';
+import FaqSection         from '../components/sections/home/FaqSection.astro';
 import AgendaTableSection from '../components/sections/home/AgendaTableSection.astro';
-import TimelineSection   from '../components/sections/home/TimelineSection.astro';
-import PricingSection    from '../components/sections/home/PricingSection.astro';
-import FaqSection        from '../components/sections/home/FaqSection.astro';
-import CtaBannerSection  from '../components/sections/home/CtaBannerSection.astro';
 
 import { travelAgencySchema } from '../data/schemas/travelAgency';
 import { breadcrumbSchema }   from '../data/schemas/breadcrumb';
@@ -30,13 +32,15 @@ import { breadcrumbSchema }   from '../data/schemas/breadcrumb';
     <HomeHero />
     <ProblemSection />
     <AboutSection />
+    <AudienceSection />
     <WhySection />
     <BenefitSection />
-    <AgendaTableSection />
     <TimelineSection />
+    <IncludesSection />
     <PricingSection />
-    <FaqSection />
     <CtaBannerSection />
+    <FaqSection />
+    <AgendaTableSection />
   </main>
 
   <Footer />
