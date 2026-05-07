@@ -21,7 +21,10 @@ function isActiveSSR(href: string): boolean {
 }
 ---
 
-<header class="absolute top-0 left-0 right-0 z-50 pt-5">
+<header
+  id="site-header"
+  class="fixed top-0 left-0 right-0 z-50 py-4 transition-[background-color,backdrop-filter,box-shadow] duration-300"
+>
   <div class="max-w-7xl mx-auto px-6">
     <nav class="flex items-center justify-between" aria-label="Navigasi utama">
 
@@ -153,6 +156,8 @@ function isActiveSSR(href: string): boolean {
 <script>
   import { initMobileMenu } from '../../lib/mobile-menu';
   import { initNavActiveState } from '../../lib/nav-active';
+  import { initStickyHeader } from '../../lib/sticky-header';
   initMobileMenu();
   initNavActiveState();
+  initStickyHeader();
 </script>
