@@ -21,7 +21,7 @@ export const WA_URL = `https://wa.me/${SITE.waNumber}`;
 export function waLink(tripName?: string, tripDate?: string): string {
   // Default message matches fix.html
   if (!tripName) {
-    const defaultMsg = 'Halo admin, saya mau daftar edu-tourism premium di jagatrip.com, mohon penjelsannya. Terimakasih';
+    const defaultMsg = 'Halo admin, saya mau daftar edu-tourism Malaysia-Thailand di jagatrip.com, mohon penjelesannya. Terimakasih';
     return `https://wa.me/${SITE.waNumber}?text=${encodeURIComponent(defaultMsg)}`;
   }
   let msg = `Halo admin, saya tertarik dengan program JAGATRIP — ${tripName}`;
