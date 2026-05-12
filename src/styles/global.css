@@ -50,6 +50,14 @@ a { transition: color 0.2s ease; }
   border-radius: 4px;
 }
 
+/* Content visibility — skip rendering off-screen sections */
+@layer base {
+  section:not(:first-of-type) {
+    content-visibility: auto;
+    contain-intrinsic-size: auto 600px;
+  }
+}
+
 /* Reduce motion */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {

@@ -4,8 +4,11 @@
  *
  * Untuk mengubah/menambah tracking:
  * 1. Meta Pixel → ganti META_PIXEL_ID di bawah
- * 2. Google Analytics → tambah section GA di bawah Meta Pixel
+ * 2. GA4 → sudah di-handle Cloudflare Zaraz (tidak perlu script manual)
  * 3. TikTok Pixel → tambah section TikTok di bawah
+ *
+ * PENTING: Script di-defer pakai requestIdleCallback agar tidak
+ * blocking render (TBT/FCP PageSpeed).
  *
  * File ini di-include di BaseLayout.astro (<head>).
  */
@@ -13,18 +16,27 @@
 const META_PIXEL_ID = '2006731503280177';
 ---
 
-{/* ── Meta Pixel ─────────────────────────────────────────────────────── */}
+{/* ── Meta Pixel (deferred — load saat browser idle) ─────────────────── */}
 <script is:inline define:vars={{ META_PIXEL_ID }}>
-  !function(f,b,e,v,n,t,s)
-  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-  n.queue=[];t=b.createElement(e);t.async=!0;
-  t.src=v;s=b.getElementsByTagName(e)[0];
-  s.parentNode.insertBefore(t,s)}(window,document,'script',
-  'https://connect.facebook.net/en_US/fbevents.js');
-  fbq('init', META_PIXEL_ID);
-  fbq('track', 'PageView');
+  (function(){
+    function loadPixel(){
+      !function(f,b,e,v,n,t,s)
+      {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+      n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+      if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+      n.queue=[];t=b.createElement(e);t.async=!0;
+      t.src=v;s=b.getElementsByTagName(e)[0];
+      s.parentNode.insertBefore(t,s)}(window,document,'script',
+      'https://connect.facebook.net/en_US/fbevents.js');
+      fbq('init', META_PIXEL_ID);
+      fbq('track', 'PageView');
+    }
+    if('requestIdleCallback' in window){
+      requestIdleCallback(loadPixel,{timeout:3500});
+    }else{
+      setTimeout(loadPixel,2000);
+    }
+  })();
 </script>
 <noscript>
   <img
@@ -36,9 +48,6 @@ const META_PIXEL_ID = '2006731503280177';
   />
 </noscript>
 
-{/* ── Tambah tracking lain di bawah sini ─────────────────────────────
-     Contoh Google Analytics:
-     <script is:inline>
-       // GA code here
-     </script>
+{/* ── GA4 di-handle Cloudflare Zaraz (otomatis) ──────────────────────
+     Zaraz events (generate_lead, form_submit) ada di lib/zaraz-events.ts
 ──────────────────────────────────────────────────────────────────────── */}

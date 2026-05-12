@@ -49,6 +49,9 @@ const schemas = [
       noindex={noindex}
     />
 
+    <!-- Preload LCP image -->
+    <link rel="preload" as="image" type="image/webp" href="/jagatrip-hero.webp" fetchpriority="high" />
+
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="/images/logo-icon.png" />
     <link rel="apple-touch-icon" href="/images/logo-icon.png" />
@@ -62,5 +65,9 @@ const schemas = [
   <body>
     <a href="#main" class="skip-link">Langsung ke konten</a>
     <slot />
+    <script>
+      import { initZarazEvents } from '../lib/zaraz-events';
+      initZarazEvents();
+    </script>
   </body>
 </html>
