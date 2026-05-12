@@ -1,8 +1,11 @@
 import { SITE } from '../data/site';
 
-/**
- * Google Apps Script Web App URL — ganti dengan URL deployment kamu.
- */
+declare global {
+  interface Window {
+    fbq?: (...args: unknown[]) => void;
+  }
+}
+
 const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwrwCUYnuIUCflczefMlYAHdCnOD-5PMqVEL94QTPWy6Hkds6SiOQLfyo7PZpVoqtjiZg/exec';
 
 export function initRegistrationForm(): void {
@@ -53,7 +56,7 @@ export function initRegistrationForm(): void {
 
     const waUrl = `https://wa.me/${SITE.waNumber}?text=${encodeURIComponent(msg)}`;
 
-    // Fire-and-forget: kirim data ke Apps Script tanpa menunggu
+    // Fire-and-forget: kirim data ke Apps Script
     fetch(APPS_SCRIPT_URL, {
       method: 'POST',
       mode: 'no-cors',
@@ -65,8 +68,15 @@ export function initRegistrationForm(): void {
       }),
     }).catch(() => {});
 
-    // Redirect langsung ke WA (dalam user gesture context → tidak diblokir)
-    window.location.href = waUrl;
+    // Meta Pixel: track InitiateCheckout
+    if (window.fbq) {
+      window.fbq('track', 'InitiateCheckout');
+    }
+
+    // Redirect ke WA (delay 300ms biar pixel sempat fire)
+    setTimeout(() => {
+      window.location.href = waUrl;
+    }, 300);
   });
 
   function showStatus(type: 'success' | 'error', msg: string): void {
