@@ -148,33 +148,19 @@ export function initRegisterForm(): void {
     const total = STEPS.length;
     const pct = Math.round(((stepIndex + 1) / total) * 100);
     const isDone = stepIndex === total - 1;
-
-    // Hanya tampilkan step yang sudah selesai + yang sedang aktif
-    const visibleSteps = STEPS.filter((_, i) => i <= stepIndex);
+    const current = STEPS[stepIndex];
 
     statusEl.innerHTML = `
       <div class="mt-6 flex flex-col items-center text-center space-y-4">
-        <!-- Spinner / checkmark -->
-        <div class="text-4xl">${isDone ? '✅' : '<span class="reg-spin">⏳</span>'}</div>
-
-        <!-- Progress bar -->
+        <div class="text-4xl"><span class="reg-spin">⏳</span></div>
         <div class="w-full max-w-xs">
           <div class="h-2.5 bg-gray-200 rounded-full overflow-hidden">
             <div class="h-full rounded-full transition-all duration-700 ease-out ${isDone ? 'bg-green-500' : 'bg-jaga-orange'}"
                  style="width: ${pct}%"></div>
           </div>
-          <p class="text-xs mt-1.5 ${isDone ? 'text-green-600 font-bold' : 'text-gray-400'}">${pct}%${isDone ? '' : ' — Jangan tutup halaman ini'}</p>
         </div>
-
-        <!-- Steps muncul satu per satu -->
-        <div class="space-y-1">
-          ${visibleSteps.map((s, i) => {
-            const isLast = i === visibleSteps.length - 1;
-            const icon = isLast && !isDone ? '<span class="reg-spin">⏳</span>' : '✅';
-            const color = isLast && !isDone ? 'text-blue-600 font-bold' : 'text-green-600';
-            return `<div class="text-xs ${color} reg-fade">${icon} ${s.label}${isLast && !isDone ? '...' : ''}</div>`;
-          }).join('')}
-        </div>
+        <p class="text-sm font-bold ${isDone ? 'text-green-600' : 'text-gray-700'} reg-fade">${current.label}${isDone ? '' : '...'}</p>
+        <p class="text-xs text-gray-400">${pct}%${isDone ? '' : ' · Jangan tutup halaman ini'}</p>
       </div>
     `;
     statusEl.classList.remove('hidden');
