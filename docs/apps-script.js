@@ -307,6 +307,11 @@ function doPost(e) {
       return handleRegistrasi(ss, data);
     }
 
+    // ── Route: LP1_Nonformal ──
+    if (targetSheet === 'LP1_Nonformal') {
+      return handleGenericLead(ss, 'LP1_Nonformal', data);
+    }
+
     // ── Route: Pendaftaran (default) ──
     return handlePendaftaran(ss, data);
 
@@ -374,12 +379,51 @@ function handleRegistrasi(ss, data) {
     .setMimeType(ContentService.MimeType.JSON);
 }
 
+// ═══════════════════════════════════════════════════════════════════════
+// GENERIC LEAD HANDLER — untuk LP forms (otomatis buat sheet jika belum ada)
+// ═══════════════════════════════════════════════════════════════════════
+
+function handleGenericLead(ss, sheetName, data) {
+  var sheet = ss.getSheetByName(sheetName);
+  if (!sheet) {
+    sheet = ss.insertSheet(sheetName);
+    var headers = ['No', 'Timestamp', 'Nama', 'WhatsApp', 'Email', 'Jabatan', 'Sekolah', 'Kota Asal', 'Catatan', 'Status', 'Source'];
+    sheet.getRange(1, 1, 1, headers.length).setValues([headers]);
+    sheet.getRange(1, 1, 1, headers.length)
+      .setBackground('#0A1F44').setFontColor('#FFFFFF').setFontWeight('bold')
+      .setFontSize(10).setHorizontalAlignment('center').setWrap(true);
+    sheet.setFrozenRows(1);
+    sheet.setRowHeight(1, 36);
+  }
+
+  var lastRow = sheet.getLastRow();
+  var no = lastRow <= 1 ? 1 : lastRow;
+
+  sheet.appendRow([
+    no,
+    data.timestamp ? new Date(data.timestamp) : new Date(),
+    data.nama || '',
+    data.wa || '',
+    data.email || '',
+    data.jabatan || '',
+    data.sekolah || '',
+    data.kota_asal || '',
+    data.catatan || '',
+    'Baru',
+    data.source || '',
+  ]);
+
+  return ContentService
+    .createTextOutput(JSON.stringify({ status: 'ok', sheet: sheetName, row: no }))
+    .setMimeType(ContentService.MimeType.JSON);
+}
+
 function doGet() {
   return ContentService
     .createTextOutput(JSON.stringify({
       status: 'ok',
       service: 'JAGATRIP Registration API',
-      sheets: [SHEET_NAME, REG_SHEET_NAME],
+      sheets: [SHEET_NAME, REG_SHEET_NAME, 'LP1_Nonformal'],
     }))
     .setMimeType(ContentService.MimeType.JSON);
 }
