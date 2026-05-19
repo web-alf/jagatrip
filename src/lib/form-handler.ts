@@ -22,13 +22,9 @@ export function initRegistrationForm(): void {
     const payload: Record<string, string> = {};
     data.forEach((val, key) => { payload[key] = val.toString().trim(); });
 
-    // Validasi
-    const required = ['nama', 'email', 'wa', 'jabatan', 'sekolah', 'kota_asal', 'kota_berangkat', 'program'];
-    for (const field of required) {
-      if (!payload[field]) {
-        showStatus('error', 'Mohon lengkapi semua field yang wajib diisi (*)');
-        return;
-      }
+    if (!payload.nama || !payload.wa) {
+      showStatus('error', 'Mohon lengkapi Nama Lengkap dan No. WhatsApp');
+      return;
     }
 
     if (btn) {
@@ -36,23 +32,14 @@ export function initRegistrationForm(): void {
       btn.textContent = 'Mengirim...';
     }
 
-    // Build WA URL
     const msg = [
-      `Halo admin JAGATRIP 👋`,
+      `Halo admin JAGATRIP! 👋`,
       ``,
-      `Saya sudah mengisi form pendaftaran di website.`,
-      ``,
-      `📋 Data saya:`,
-      `Nama: ${payload.nama}`,
-      `Jabatan: ${payload.jabatan}`,
-      `Sekolah/Instansi: ${payload.sekolah}`,
-      `Kota Asal: ${payload.kota_asal}`,
-      `Kota Berangkat: ${payload.kota_berangkat}`,
-      `Program: ${payload.program}`,
-      payload.peserta ? `Estimasi Peserta: ${payload.peserta}` : '',
+      `Saya ${payload.nama}, tertarik daftar Edutrip Malaysia-Thailand Juni 2026.`,
+      `(Dari halaman: Homepage)`,
       ``,
       `Mohon konfirmasi pendaftaran saya. Terima kasih! 🙏`,
-    ].filter(Boolean).join('\n');
+    ].join('\n');
 
     const waUrl = `https://wa.me/${SITE.waNumber}?text=${encodeURIComponent(msg)}`;
 

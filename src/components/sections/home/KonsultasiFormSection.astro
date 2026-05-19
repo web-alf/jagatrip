@@ -1,30 +1,4 @@
 ---
-import { getCollection } from 'astro:content';
-
-const trips = (await getCollection('trips')).sort((a, b) => a.data.monthNum - b.data.monthNum);
-
-const jabatanOptions = [
-  'Kepala Sekolah',
-  'Guru / Pendidik',
-  'Pengawas Pendidikan',
-  'Owner Yayasan',
-  'Mahasiswa Pendidikan',
-  'Orang Tua',
-  'Siswa SMP/SMA',
-  'Pemerhati Pendidikan',
-  'Lainnya',
-];
-
-const kotaBerangkat = [
-  'Padang', 'Pekanbaru', 'Aceh (BTJ)', 'Batam', 'Medan', 'Palembang (PLM)',
-  'Jakarta', 'Pontianak', 'Bali (Denpasar)', 'Balikpapan (BPN)',
-  'Semarang (SRG)', 'Surabaya', 'Jogja (YIA)', 'Makassar (UPG)',
-  'Lampung (TKG)', 'Pangkal Pinang (PGK)', 'Tarakan (TRK)', 'Lombok (LOP)',
-  'Banjarmasin (BDJ)', 'Bengkulu (BKS)', 'NTT (Kupang/KOE)', 'Palu (PLW)',
-  'Maluku/Ambon (AMQ)', 'Palangkaraya (PKY)', 'Gorontalo (GTO)', 'Sorong (SOQ)',
-  'Kendari (KDI)', 'Jayapura (DJJ)', 'Merauke (MKQ)', 'Lainnya',
-];
-
 const inputClass = 'w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:border-jaga-orange focus:outline-none text-gray-900 placeholder:text-gray-400 text-sm font-medium transition-colors bg-white';
 ---
 
@@ -86,79 +60,13 @@ const inputClass = 'w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:b
           <!-- Nama -->
           <div>
             <label for="f-nama" class="block text-xs font-bold text-gray-600 uppercase tracking-wider mb-1">Nama Lengkap *</label>
-            <input id="f-nama" name="nama" type="text" required placeholder="cth: Ahmad Fathullah" class={inputClass} />
+            <input id="f-nama" name="nama" type="text" required placeholder="Nama lengkap Anda" class={inputClass} />
           </div>
 
-          <!-- Email & WA (2 col) -->
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-            <div>
-              <label for="f-email" class="block text-xs font-bold text-gray-600 uppercase tracking-wider mb-1">Email *</label>
-              <input id="f-email" name="email" type="email" required placeholder="email@sekolah.sch.id" class={inputClass} />
-            </div>
-            <div>
-              <label for="f-wa" class="block text-xs font-bold text-gray-600 uppercase tracking-wider mb-1">No. WhatsApp *</label>
-              <input id="f-wa" name="wa" type="tel" required inputmode="numeric" placeholder="081234567890" class={inputClass} />
-            </div>
-          </div>
-
-          <!-- Jabatan -->
+          <!-- WA -->
           <div>
-            <label for="f-jabatan" class="block text-xs font-bold text-gray-600 uppercase tracking-wider mb-1">Jabatan / Profesi *</label>
-            <select id="f-jabatan" name="jabatan" required class={inputClass}>
-              <option value="">— Pilih Jabatan —</option>
-              {jabatanOptions.map(j => <option value={j}>{j}</option>)}
-            </select>
-          </div>
-
-          <!-- Sekolah/Instansi -->
-          <div>
-            <label for="f-sekolah" class="block text-xs font-bold text-gray-600 uppercase tracking-wider mb-1">Nama Sekolah / Instansi *</label>
-            <input id="f-sekolah" name="sekolah" type="text" required placeholder="cth: SMA Negeri 1 Semarang" class={inputClass} />
-          </div>
-
-          <!-- Kota Asal & Kota Berangkat (2 col) -->
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-            <div>
-              <label for="f-kota-asal" class="block text-xs font-bold text-gray-600 uppercase tracking-wider mb-1">Kota / Provinsi Asal *</label>
-              <input id="f-kota-asal" name="kota_asal" type="text" required placeholder="cth: Semarang, Jawa Tengah" class={inputClass} />
-            </div>
-            <div>
-              <label for="f-kota-berangkat" class="block text-xs font-bold text-gray-600 uppercase tracking-wider mb-1">Kota Keberangkatan *</label>
-              <select id="f-kota-berangkat" name="kota_berangkat" required class={inputClass}>
-                <option value="">— Pilih Bandara —</option>
-                {kotaBerangkat.map(k => <option value={k}>{k}</option>)}
-              </select>
-            </div>
-          </div>
-
-          <!-- Program (fixed — hanya Malaysia & Thailand Juni 2026) -->
-          <div>
-            <label for="f-program" class="block text-xs font-bold text-gray-600 uppercase tracking-wider mb-1">Program Tujuan</label>
-            <input
-              id="f-program" name="program" type="text" readonly
-              value="🇲🇾🇹🇭 Malaysia & Thailand — Juni 2026"
-              class={`${inputClass} bg-gray-100 cursor-not-allowed text-gray-500`}
-            />
-          </div>
-
-          <!-- Peserta & Catatan (2 col) -->
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-            <div>
-              <label for="f-peserta" class="block text-xs font-bold text-gray-600 uppercase tracking-wider mb-1">Jumlah Peserta</label>
-              <select id="f-peserta" name="peserta" class={inputClass}>
-                <option value="">— Opsional —</option>
-                <option value="1 orang">1 orang (Individu)</option>
-                <option value="2-5 orang">2–5 orang</option>
-                <option value="6-10 orang">6–10 orang</option>
-                <option value="11-20 orang">11–20 orang</option>
-                <option value="21-50 orang">21–50 orang</option>
-                <option value="50+ orang">50+ orang</option>
-              </select>
-            </div>
-            <div>
-              <label for="f-catatan" class="block text-xs font-bold text-gray-600 uppercase tracking-wider mb-1">Catatan</label>
-              <input id="f-catatan" name="catatan" type="text" placeholder="Pesan tambahan (opsional)" class={inputClass} />
-            </div>
+            <label for="f-wa" class="block text-xs font-bold text-gray-600 uppercase tracking-wider mb-1">No. WhatsApp *</label>
+            <input id="f-wa" name="wa" type="tel" required inputmode="numeric" placeholder="081234567890" class={inputClass} />
           </div>
 
           <!-- Submit -->
