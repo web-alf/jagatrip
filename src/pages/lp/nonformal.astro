@@ -323,6 +323,9 @@ const wa = `https://wa.me/${SITE.waNumber}?text=${encodeURIComponent('Halo JAGAT
         body: JSON.stringify({ _sheet: 'LP1_Nonformal', ...payload, timestamp: new Date().toISOString(), source: window.location.href }),
       }).catch(() => {});
 
+      // Meta Pixel: track Lead
+      if ((window as any).fbq) (window as any).fbq('track', 'Lead');
+
       const msg = `Halo JAGATRIP! 👋\n\nSaya ${payload.nama} dari ${payload.sekolah} (${payload.kota_asal}).\nSaya tertarik daftar Edutrip Malaysia-Thailand Juni 2026.\n\nMohon info lebih lanjut. Terima kasih!`;
       setTimeout(() => {
         window.location.href = `https://wa.me/${SITE.waNumber}?text=${encodeURIComponent(msg)}`;
