@@ -275,6 +275,10 @@ import Footer from '../components/layout/Footer.astro';
         body: JSON.stringify({ _sheet: 'LP1_Nonformal', ...payload, timestamp: new Date().toISOString(), source: window.location.href }),
       }).catch(() => {});
 
+      if ((window as any).fbq) {
+        (window as any).fbq('track', 'Lead');
+      }
+
       const msg = `Halo JAGATRIP! 👋\n\nSaya ${payload.nama}.\nSaya tertarik daftar Edutrip Malaysia-Thailand Juni 2026.\n(Dari halaman: LP Nonformal)\n\nMohon info lebih lanjut. Terima kasih!`;
       setTimeout(() => {
         window.location.href = `https://wa.me/${SITE.waNumber}?text=${encodeURIComponent(msg)}`;
