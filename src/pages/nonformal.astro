@@ -281,7 +281,7 @@ import Footer from '../components/layout/Footer.astro';
       }).catch(() => {});
 
       if ((window as any).fbq) { (window as any).fbq('track', 'Lead'); }
-      if ((window as any).ttq) { (window as any).ttq.track('SubmitForm'); }
+      if ((window as any).ttq) { (window as any).ttq.track('CompleteRegistration'); }
 
       const msg = `Halo JAGATRIP! 👋\n\nSaya ${payload.nama}.\nSaya tertarik daftar Edutrip Malaysia-Thailand Juni 2026.\n(Dari halaman: LP Nonformal)\n\nMohon info lebih lanjut. Terima kasih!`;
       setTimeout(() => {
