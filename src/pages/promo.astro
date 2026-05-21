@@ -261,9 +261,7 @@ const waPromo = `https://wa.me/${SITE.waNumber}?text=${encodeURIComponent('Halo 
         body: JSON.stringify({ _sheet: 'LP2_Promo', ...payload, timestamp: new Date().toISOString(), source: window.location.href }),
       }).catch(() => {});
 
-      if ((window as any).fbq) {
-        (window as any).fbq('track', 'Lead');
-      }
+      if ((window as any).fbq) { (window as any).fbq('track', 'Lead'); }
 
       const msg = `Halo JAGATRIP! 👋\n\nSaya ${payload.nama}, tertarik daftar Edutrip Malaysia-Thailand Juni 2026.\n(Dari halaman: LP Promo)\n\nMohon konfirmasi pendaftaran saya. Terima kasih!`;
       setTimeout(() => {

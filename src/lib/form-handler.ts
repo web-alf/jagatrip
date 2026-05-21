@@ -55,10 +55,7 @@ export function initRegistrationForm(): void {
       }),
     }).catch(() => {});
 
-    // Meta Pixel: track Lead
-    if (window.fbq) {
-      window.fbq('track', 'Lead');
-    }
+    if (window.fbq) { window.fbq('track', 'Lead'); }
 
     // Redirect ke WA (delay 300ms biar pixel sempat fire)
     setTimeout(() => {
