@@ -14,37 +14,89 @@ const wa = waLink();
 >
   <Nav />
 
-  <main id="main" class="min-h-[80vh] flex items-center justify-center bg-jaga-bg pt-32 pb-20 lg:pt-40">
-    <div class="max-w-2xl mx-auto px-6 text-center">
-      <div class="text-7xl md:text-8xl mb-4" aria-hidden="true">✈️</div>
-      <p class="text-7xl md:text-9xl font-black text-jaga-orange leading-none mb-4">404</p>
+  <main id="main" class="relative min-h-[80vh] flex items-center justify-center bg-jaga-bg pt-32 pb-20 lg:pt-40 overflow-hidden">
+    <!-- Radial gradient overlay -->
+    <div class="absolute inset-0 z-0 opacity-8 bg-[radial-gradient(circle_at_top_right,var(--color-jaga-orange),transparent_60%),radial-gradient(circle_at_bottom_left,var(--color-jaga-orange),transparent_60%)]"></div>
+
+    <!-- Decorative dots -->
+    <div class="dot dot-1"></div>
+    <div class="dot dot-2"></div>
+    <div class="dot dot-3"></div>
+    <div class="dot dot-4"></div>
+    <div class="dot dot-5"></div>
+
+    <!-- Floating clouds -->
+    <svg class="cloud cloud-1" width="120" height="40" viewBox="0 0 120 40" fill="currentColor" aria-hidden="true">
+      <ellipse cx="60" cy="25" rx="50" ry="15"/><ellipse cx="35" cy="18" rx="25" ry="12"/><ellipse cx="80" cy="18" rx="30" ry="14"/>
+    </svg>
+    <svg class="cloud cloud-2" width="100" height="35" viewBox="0 0 100 35" fill="currentColor" aria-hidden="true">
+      <ellipse cx="50" cy="22" rx="40" ry="13"/><ellipse cx="30" cy="15" rx="22" ry="10"/><ellipse cx="70" cy="16" rx="25" ry="11"/>
+    </svg>
+    <svg class="cloud cloud-3" width="80" height="30" viewBox="0 0 80 30" fill="currentColor" aria-hidden="true">
+      <ellipse cx="40" cy="18" rx="35" ry="12"/><ellipse cx="22" cy="12" rx="18" ry="9"/><ellipse cx="58" cy="13" rx="20" ry="10"/>
+    </svg>
+
+    <div class="relative z-10 max-w-2xl mx-auto px-6 text-center">
+      <!-- Globe illustration -->
+      <div class="globe-wrapper">
+        <svg class="globe" viewBox="0 0 280 280" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <circle cx="140" cy="140" r="120" stroke="var(--color-jaga-orange)" stroke-width="2" fill="none" opacity="0.15"/>
+          <circle cx="140" cy="140" r="120" fill="var(--color-jaga-orange)" opacity="0.04"/>
+          <ellipse cx="140" cy="140" rx="120" ry="40" stroke="var(--color-jaga-orange)" stroke-width="1" fill="none" opacity="0.1"/>
+          <ellipse cx="140" cy="140" rx="120" ry="80" stroke="var(--color-jaga-orange)" stroke-width="1" fill="none" opacity="0.1"/>
+          <ellipse cx="140" cy="140" rx="40" ry="120" stroke="var(--color-jaga-orange)" stroke-width="1" fill="none" opacity="0.1"/>
+          <ellipse cx="140" cy="140" rx="80" ry="120" stroke="var(--color-jaga-orange)" stroke-width="1" fill="none" opacity="0.1"/>
+          <ellipse cx="140" cy="140" rx="120" ry="10" stroke="var(--color-jaga-orange)" stroke-width="1.5" fill="none" opacity="0.2"/>
+          <path d="M80 100 Q95 85 120 90 Q140 80 155 95 Q165 105 160 120 Q150 130 130 125 Q110 130 95 120 Q80 115 80 100Z" fill="var(--color-jaga-orange)" opacity="0.12"/>
+          <path d="M155 140 Q170 135 185 145 Q195 155 190 170 Q180 180 165 175 Q150 165 155 140Z" fill="var(--color-jaga-orange)" opacity="0.12"/>
+          <path d="M90 150 Q105 145 115 155 Q120 165 110 175 Q95 170 90 150Z" fill="var(--color-jaga-orange)" opacity="0.1"/>
+          <path class="dashed-path" d="M70 180 Q100 120 140 110 Q180 100 210 130 Q230 155 200 90" stroke="var(--color-jaga-orange)" stroke-width="2" fill="none" opacity="0.3"/>
+          <g class="plane-icon" transform="translate(185, 95)">
+            <path d="M0 8 L12 4 L24 8 L12 0Z" fill="var(--color-jaga-orange)" opacity="0.6"/>
+            <path d="M10 6 L14 6 L14 14 L10 14Z" fill="var(--color-jaga-orange)" opacity="0.6"/>
+            <path d="M8 13 L16 13 L14 16 L10 16Z" fill="var(--color-jaga-orange)" opacity="0.4"/>
+          </g>
+        </svg>
+
+        <!-- Pin marker -->
+        <svg class="pin" width="28" height="38" viewBox="0 0 28 38" aria-hidden="true">
+          <path d="M14 0C6.3 0 0 6.3 0 14c0 10.5 14 24 14 24s14-13.5 14-24C28 6.3 21.7 0 14 0z" fill="var(--color-jaga-orange)"/>
+          <circle cx="14" cy="14" r="6" fill="white"/>
+        </svg>
+
+        <!-- Label bubble -->
+        <span class="pin-label">Kamu di sini!</span>
+      </div>
+
+      <p class="text-7xl md:text-8xl font-black text-jaga-orange leading-none mb-2 tracking-tight">404</p>
 
       <h1 class="text-3xl md:text-5xl font-black text-gray-900 tracking-tight mb-6">
-        Halaman <span class="text-jaga-orange">Tidak Ditemukan</span>
+        Destinasi <span class="text-jaga-orange">Tidak Ditemukan</span>
       </h1>
 
-      <p class="text-lg md:text-xl text-gray-600 leading-relaxed mb-10">
-        Sepertinya halaman ini sudah terbang ke destinasi lain. Mari kembali ke beranda atau
-        jelajahi program JAGATRIP 2026.
+      <p class="text-lg md:text-xl text-gray-500 leading-relaxed mb-10">
+        Sepertinya kamu mendarat di koordinat yang salah!<br>
+        Tenang, perjalanan belum berakhir — mari kembali ke rute yang benar.
       </p>
 
       <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
         <a
           href="/"
-          class="inline-block bg-jaga-orange hover:bg-jaga-orange-600 text-white px-8 py-4 rounded-full font-bold text-lg shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-1"
+          class="group inline-flex items-center gap-2 bg-jaga-orange hover:bg-jaga-orange-600 text-white px-8 py-4 rounded-full font-bold text-lg shadow-[0_10px_30px_rgba(232,97,31,0.3)] hover:shadow-[0_15px_40px_rgba(232,97,31,0.4)] transition-all duration-300 transform hover:-translate-y-1"
         >
-          ← Kembali ke Beranda
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-4 0a1 1 0 01-1-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 01-1 1"/></svg>
+          Kembali ke Beranda
         </a>
         <a
           href="/#agenda"
-          class="inline-block bg-white text-gray-900 border-2 border-gray-200 hover:border-jaga-orange hover:text-jaga-orange px-8 py-4 rounded-full font-bold text-lg transition-all"
+          class="inline-flex items-center gap-2 bg-white text-gray-900 border-2 border-gray-200 hover:border-jaga-orange hover:text-jaga-orange px-8 py-4 rounded-full font-bold text-lg transition-all duration-300"
         >
           Lihat Agenda 2026
         </a>
       </div>
 
       <p class="mt-10 text-sm text-gray-500">
-        atau hubungi
+        Butuh bantuan? Hubungi
         <a href={wa} target="_blank" rel="noopener noreferrer" class="text-jaga-orange font-bold hover:underline">
           admin via WhatsApp
         </a>
@@ -55,3 +107,132 @@ const wa = waLink();
   <Footer />
   <FloatingWA />
 </BaseLayout>
+
+<style>
+  /* Globe */
+  .globe-wrapper {
+    position: relative;
+    width: 280px;
+    height: 280px;
+    margin: 0 auto 2rem;
+  }
+
+  .globe {
+    width: 280px;
+    height: 280px;
+    animation: float 4s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-12px); }
+  }
+
+  /* Pin */
+  .pin {
+    position: absolute;
+    top: 28%;
+    left: 55%;
+    animation: bounce-pin 1.5s ease-in-out infinite;
+  }
+
+  .pin-label {
+    position: absolute;
+    top: 18%;
+    left: 62%;
+    background: var(--color-jaga-orange);
+    color: white;
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 4px 12px;
+    border-radius: 999px;
+    white-space: nowrap;
+    box-shadow: 0 4px 12px rgba(232, 97, 31, 0.3);
+    animation: bounce-pin 1.5s ease-in-out infinite;
+  }
+
+  .pin-label::after {
+    content: '';
+    position: absolute;
+    bottom: -6px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-top: 6px solid var(--color-jaga-orange);
+  }
+
+  @keyframes bounce-pin {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+  }
+
+  /* Dashed flight path */
+  .dashed-path {
+    stroke-dasharray: 8 6;
+    animation: dash 20s linear infinite;
+  }
+
+  @keyframes dash {
+    to { stroke-dashoffset: -200; }
+  }
+
+  /* Plane */
+  .plane-icon {
+    animation: fly 6s ease-in-out infinite;
+  }
+
+  @keyframes fly {
+    0% { transform: translate(0, 0) rotate(-15deg); }
+    25% { transform: translate(15px, -10px) rotate(-5deg); }
+    50% { transform: translate(30px, -5px) rotate(5deg); }
+    75% { transform: translate(15px, 5px) rotate(-10deg); }
+    100% { transform: translate(0, 0) rotate(-15deg); }
+  }
+
+  /* Clouds */
+  .cloud {
+    position: absolute;
+    color: var(--color-jaga-orange);
+    opacity: 0.06;
+    z-index: 1;
+  }
+
+  .cloud-1 { top: 15%; left: 5%; animation: drift 25s linear infinite; }
+  .cloud-2 { top: 60%; right: 8%; animation: drift 30s linear infinite reverse; }
+  .cloud-3 { bottom: 20%; left: 15%; animation: drift 20s linear infinite; }
+
+  @keyframes drift {
+    0% { transform: translateX(0); }
+    50% { transform: translateX(30px); }
+    100% { transform: translateX(0); }
+  }
+
+  /* Dots */
+  .dot {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: var(--color-jaga-orange);
+    border-radius: 50%;
+    z-index: 1;
+  }
+
+  .dot-1 { top: 10%; left: 20%; animation: twinkle 3s ease-in-out infinite; }
+  .dot-2 { top: 25%; right: 15%; animation: twinkle 4s ease-in-out infinite 1s; }
+  .dot-3 { bottom: 30%; left: 10%; animation: twinkle 3.5s ease-in-out infinite 0.5s; }
+  .dot-4 { bottom: 15%; right: 25%; animation: twinkle 2.5s ease-in-out infinite 1.5s; }
+  .dot-5 { top: 40%; left: 8%; animation: twinkle 4.5s ease-in-out infinite 0.8s; }
+
+  @keyframes twinkle {
+    0%, 100% { opacity: 0.1; transform: scale(1); }
+    50% { opacity: 0.3; transform: scale(1.5); }
+  }
+
+  /* Reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    .globe, .pin, .pin-label, .plane-icon, .cloud, .dot, .dashed-path {
+      animation: none !important;
+    }
+  }
+</style>
