@@ -307,14 +307,10 @@ function doPost(e) {
       return handleRegistrasi(ss, data);
     }
 
-    // ── Route: LP1_Nonformal ──
-    if (targetSheet === 'LP1_Nonformal') {
-      return handleGenericLead(ss, 'LP1_Nonformal', data);
-    }
-
-    // ── Route: LP2_Promo ──
-    if (targetSheet === 'LP2_Promo') {
-      return handleGenericLead(ss, 'LP2_Promo', data);
+    // ── Route: Landing Page leads (LP1_Nonformal, LP2_Promo, LP_Jagatalk02, …) ──
+    // Setiap _sheet berawalan "LP" diarahkan ke generic handler (auto-create sheet).
+    if (targetSheet.indexOf('LP') === 0) {
+      return handleGenericLead(ss, targetSheet, data);
     }
 
     // ── Route: Pendaftaran (default) ──
@@ -411,7 +407,7 @@ function handleGenericLead(ss, sheetName, data) {
     data.wa || '',
     data.email || '',
     data.jabatan || '',
-    data.sekolah || '',
+    data.sekolah || data.instansi || '',
     data.kota_asal || '',
     data.catatan || '',
     'Baru',
@@ -428,7 +424,7 @@ function doGet() {
     .createTextOutput(JSON.stringify({
       status: 'ok',
       service: 'JAGATRIP Registration API',
-      sheets: [SHEET_NAME, REG_SHEET_NAME, 'LP1_Nonformal', 'LP2_Promo'],
+      sheets: [SHEET_NAME, REG_SHEET_NAME, 'LP1_Nonformal', 'LP2_Promo', 'LP_Jagatalk02'],
     }))
     .setMimeType(ContentService.MimeType.JSON);
 }

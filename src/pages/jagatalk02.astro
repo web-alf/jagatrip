@@ -1298,9 +1298,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         // Randomly load balance between the two WhatsApp admin numbers
         const selectedAdmin = admins[Math.floor(Math.random() * admins.length)];
         
-        // Custom greeting message format:
-        // Hai admin Jagatalk, saya (nama) telah mengisi form pendaftaran Jagatalk Seri 2. Bagaimana langkah selanjutnya?
-        const greeting = `Hai admin Jagatalk, saya ${nama} telah mengisi form pendaftaran Jagatalk Seri 2. Bagaimana langkah selanjutnya?`;
+        // Custom greeting message format (includes instansi for admin context):
+        const greeting = `Hai admin Jagatalk, saya ${nama} dari ${instansi} telah mengisi form pendaftaran JAGATALK Episode 02. Bagaimana langkah selanjutnya?`;
         const waUrl = `https://wa.me/${selectedAdmin}?text=${encodeURIComponent(greeting)}`;
         
         const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwrwCUYnuIUCflczefMlYAHdCnOD-5PMqVEL94QTPWy6Hkds6SiOQLfyo7PZpVoqtjiZg/exec';
@@ -1312,6 +1311,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
             mode: 'no-cors',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
+              _sheet: 'LP_Jagatalk02',
               nama: nama,
               instansi: instansi,
               wa: wa,
