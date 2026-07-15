@@ -100,10 +100,11 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         <span class="jt-eyebrow" style="text-align:center;display:block;">JADWAL TERDEKAT</span>
         <h2 style="text-align:center;">Webinar minggu ini.</h2>
         <div class="jt-terdekat-grid">
-          <img src="/jagatalk-webinar-5.webp" alt="Poster JAGATALK Webinar #5 — Kak Yasin, Guilin University of Electronic Technology (China)" class="jt-terdekat-flyer" />
+          <img src="/jagatalk-webinar-6.webp" alt="Poster JAGATALK Webinar #6 — Dari Networking ke AI, Muhammad Nibras Salsabil, Guilin University of Electronic Technology (China)" class="jt-terdekat-flyer" />
           <div class="jt-terdekat-info">
-            <div class="jt-terdekat-row"><span class="ico">🎙️</span><div><span class="lbl">Narasumber</span><span class="val">Kak Yasin · Guilin University of Electronic Technology, China</span></div></div>
-            <div class="jt-terdekat-row"><span class="ico">📅</span><div><span class="lbl">Tanggal</span><span class="val">Jumat, 10 Juli 2026</span></div></div>
+            <div class="jt-terdekat-row"><span class="ico">🎯</span><div><span class="lbl">Topik</span><span class="val">Dari Networking ke AI: Menyiapkan Talenta Digital Masa Depan</span></div></div>
+            <div class="jt-terdekat-row"><span class="ico">🎙️</span><div><span class="lbl">Narasumber</span><span class="val">Muhammad Nibras Salsabil · Mahasiswa AI, Guilin University of Electronic Technology, China</span></div></div>
+            <div class="jt-terdekat-row"><span class="ico">📅</span><div><span class="lbl">Tanggal</span><span class="val">Jumat, 24 Juli 2026</span></div></div>
             <div class="jt-terdekat-row"><span class="ico">🕢</span><div><span class="lbl">Waktu</span><span class="val">19.30 – 21.30 WIB</span></div></div>
             <div class="jt-terdekat-row"><span class="ico">💻</span><div><span class="lbl">Platform</span><span class="val">via Zoom Meeting</span></div></div>
             <a class="jt-btn-primary" href="#final-cta" style="margin-top:8px;">🎯 Amankan Kursi Anda Sekarang!</a>
@@ -143,13 +144,13 @@ import BaseLayout from '../layouts/BaseLayout.astro';
             <p class="jt-jadwal-univ">University of Glasgow, Skotlandia</p>
             <div class="jt-jadwal-date">19 Juni 2026</div>
           </div>
-          <div class="jt-jadwal-box jt-jadwal-next">
+          <div class="jt-jadwal-box">
             <div class="jt-jadwal-icon">🧑‍🎓</div>
             <h3>Kak Yasin</h3>
             <p class="jt-jadwal-univ">Guilin University of Electronic Technology, China</p>
             <div class="jt-jadwal-date">10 Juli 2026</div>
           </div>
-          <div class="jt-jadwal-box">
+          <div class="jt-jadwal-box jt-jadwal-next">
             <div class="jt-jadwal-icon">👨‍🎓</div>
             <h3>Kak Nibras</h3>
             <p class="jt-jadwal-univ">Guilin University of Electronic Technology, China</p>
@@ -289,8 +290,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         </div>
         <div class="jt-foot-col">
           <h5>Kontak</h5>
-          <a target="_blank" href="https://wa.me/6281128506576">WA 1: 0811-2850-6576</a>
-          <a target="_blank" href="https://wa.me/6281128506715">WA 2: 0811-2850-6715</a>
+          <a target="_blank" href="https://wa.me/6281128506576">Admin JagaTalk: 0811-2850-6576</a>
           <a href="mailto:pm@jagatrip.com">pm@jagatrip.com</a>
         </div>
         <div class="jt-foot-col">
@@ -566,7 +566,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
     const btn = form.querySelector('button[type="submit"]') as HTMLButtonElement | null;
     const statusEl = document.getElementById('reg-status-jagatalk');
-    const admins = ['6281128506576', '6281128506715'];
+    const admins = ['6281128506576'];
     const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwrwCUYnuIUCflczefMlYAHdCnOD-5PMqVEL94QTPWy6Hkds6SiOQLfyo7PZpVoqtjiZg/exec';
 
     function showStatus(type: 'ok' | 'err', msg: string): void {
