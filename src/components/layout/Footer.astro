@@ -1,6 +1,7 @@
 ---
 import { SITE, waLink } from '../../data/site';
 import { getCollection } from 'astro:content';
+import FlagIcon from '../brand/FlagIcon.astro';
 
 const wa = waLink();
 const trips = (await getCollection('trips'))
@@ -58,7 +59,7 @@ const trips = (await getCollection('trips'))
           {trips.map((trip) => (
             <li>
               <div class="flex items-center gap-2 text-gray-400 text-sm">
-                <span aria-hidden="true" class="text-base leading-none">{trip.data.flag}</span>
+                <span aria-hidden="true" class="text-base leading-none inline-flex items-center gap-0.5"><FlagIcon flag={trip.data.flag} /></span>
                 <span>{trip.data.destination}</span>
                 <span class="ml-auto text-xs text-gray-600 shrink-0">{trip.data.month}</span>
               </div>

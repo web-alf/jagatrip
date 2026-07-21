@@ -1,0 +1,42 @@
+---
+/**
+ * Render bendera negara sebagai SVG (konsisten lintas OS).
+ *
+ * Emoji bendera (🇲🇾 🇹🇭 🇸🇬 🇯🇵 🇨🇳) TIDAK dirender pada Windows & banyak
+ * Linux — tampil sebagai kode huruf. Komponen ini mem-parse regional indicator
+ * pairs menjadi kode negara lalu menampilkan SVG dari /images/flags/<code>.svg.
+ * Emoji non-bendera (🌿 🏝️ 🌺) tetap ditampilkan apa adanya.
+ */
+interface Props {
+  flag: string;
+  class?: string;
+}
+const { flag, class: cls = 'inline-block h-3.5 w-auto rounded-[2px] align-middle' } = Astro.props;
+
+const RI_START = 0x1F1E6; // 'A' regional indicator
+type Seg = { code?: string; emoji?: string };
+const segments: Seg[] = [];
+
+let i = 0;
+while (i < flag.length) {
+  const c = flag.codePointAt(i)!;
+  if (c >= RI_START && c <= RI_START + 25) {
+    const c2 = flag.codePointAt(i + 2);
+    if (c2 !== undefined && c2 >= RI_START && c2 <= RI_START + 25) {
+      const code = String.fromCharCode(65 + (c - RI_START), 65 + (c2 - RI_START)).toLowerCase();
+      segments.push({ code });
+      i += 4; // dua surrogate pair
+      continue;
+    }
+  }
+  // Lewati variation selector & zero-width (FE0F, 200D) — ikut emoji sebelumnya
+  const ch = String.fromCodePoint(c);
+  segments.push({ emoji: ch });
+  i += ch.length;
+}
+---
+{segments.map((s) => s.code ? (
+  <img src={`/images/flags/${s.code}.svg`} alt="" class={cls} loading="lazy" decoding="async" width="20" height="14" />
+) : (
+  <span class="align-middle">{s.emoji}</span>
+))}
