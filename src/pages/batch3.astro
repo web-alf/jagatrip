@@ -1,187 +1,442 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import Nav from '../components/layout/Nav.astro';
+import Footer from '../components/layout/Footer.astro';
+import { SITE } from '../data/site';
 ---
+
 <BaseLayout
   title="JAGATRIP #3 — Benchmarking Pendidikan Malaysia · Thailand · Singapura"
   description="Edutrip & studi banding internasional 3 negara: Malaysia, Thailand, Singapura. 11–17 Desember 2026, 7 hari 6 malam, kuota 30 peserta. Daftar sekarang."
   canonical="https://jagatrip.com/batch3"
   ogType="website"
 >
-  <header class="nav">
-    <a href="/" aria-label="JAGATRIP"><img src="/images/china/jagatrip-logo.png" width="2094" height="570" alt="JAGATRIP Mitra Edukasi"></a>
-    <a class="nav-cta" href="#form">Daftar Sekarang</a>
-  </header>
+  <Nav />
 
   <main id="main">
-    <!-- HERO -->
-    <section class="hero">
-      <div class="hero-copy">
-        <p class="flags">🇲🇾&nbsp;&nbsp;🇹🇭&nbsp;&nbsp;🇸🇬</p>
-        <p class="kicker"><span></span> JAGATRIP #3 · EDUCATION MISSION</p>
-        <h1>Melangkah <em>lintas negara,</em> membawa pulang praktik kelas dunia.</h1>
-        <p class="hero-lead">Tujuh hari ekspedisi benchmarking pendidikan di Malaysia, Thailand, dan Singapura. Kunjungan sekolah, seminar internasional, dan wisata edukatif dalam satu perjalanan lintas tiga negara ASEAN.</p>
-        <div class="actions"><a class="button primary" href="#form">Daftar Sekarang</a><a class="button secondary" href="#itinerary">Lihat Itinerary <span>↓</span></a></div>
-        <div class="hero-badges">
-          <div class="badge"><span>📅</span> <b>11–17 Des 2026</b></div>
-          <div class="badge"><span>⏱</span> <b>7 Hari 6 Malam</b></div>
-          <div class="badge"><span>🎓</span> <b>Agenda Edukasi</b></div>
-          <div class="badge"><span>🔥</span> <b>Kuota 30 Peserta</b></div>
+
+    <!-- ===================== HERO ===================== -->
+    <section class="relative pt-32 pb-20 lg:pt-40 lg:pb-28 bg-jaga-bg overflow-hidden">
+      <div class="absolute top-0 right-0 w-[36rem] h-[36rem] bg-jaga-orange/10 rounded-full blur-3xl -z-0"></div>
+      <div class="absolute bottom-0 left-0 w-96 h-96 bg-jaga-orange/5 rounded-full blur-3xl -z-0"></div>
+      <div class="max-w-7xl mx-auto px-6 relative z-10">
+        <div class="grid lg:grid-cols-[1.1fr_0.9fr] gap-12 items-center">
+
+          <div>
+            <p class="text-2xl md:text-3xl mb-4 tracking-[0.3em]">🇲🇾 &nbsp; 🇹🇭 &nbsp; 🇸🇬</p>
+            <span class="inline-block py-2 px-5 rounded-full bg-gray-900 text-white font-bold text-xs md:text-sm tracking-[0.25em] uppercase mb-6">
+              JAGATRIP #3 · Edutrip &amp; Studi Banding
+            </span>
+            <h1 class="text-4xl md:text-6xl font-black text-gray-900 tracking-tight leading-[1.05] mb-6">
+              Benchmarking Pendidikan<br>
+              <span class="text-jaga-orange">3 Negara ASEAN.</span>
+            </h1>
+            <p class="text-lg md:text-xl text-gray-600 font-medium leading-relaxed mb-8 max-w-xl">
+              Ekspedisi belajar lintas Malaysia, Thailand, dan Singapura — seminar internasional, kunjungan sekolah &amp; kampus, serta wisata edukatif dalam satu perjalanan.
+            </p>
+
+            <div class="flex flex-wrap gap-3 mb-8">
+              <span class="inline-flex items-center gap-2 bg-white border border-gray-200 rounded-full px-4 py-2 text-sm font-bold text-gray-800 shadow-sm">📅 11–17 Des 2026</span>
+              <span class="inline-flex items-center gap-2 bg-white border border-gray-200 rounded-full px-4 py-2 text-sm font-bold text-gray-800 shadow-sm">⏱ 7 Hari 6 Malam</span>
+              <span class="inline-flex items-center gap-2 bg-white border border-gray-200 rounded-full px-4 py-2 text-sm font-bold text-gray-800 shadow-sm">🔥 Kuota 30 Peserta</span>
+            </div>
+
+            <div class="flex flex-wrap gap-4">
+              <a href="#form" class="bg-jaga-orange hover:bg-jaga-orange-600 text-white px-8 py-4 rounded-full font-bold text-base md:text-lg shadow-[0_10px_30px_rgba(232,97,31,0.3)] hover:shadow-[0_15px_40px_rgba(232,97,31,0.4)] transition-all duration-300 transform hover:-translate-y-1">
+                Daftar Sekarang
+              </a>
+              <a href="#itinerary" class="border-2 border-gray-900 text-gray-900 hover:bg-gray-900 hover:text-white px-8 py-4 rounded-full font-bold text-base md:text-lg transition-all duration-300">
+                Lihat Itinerary
+              </a>
+            </div>
+          </div>
+
+          <!-- Ringkasan -->
+          <div class="bg-white rounded-4xl shadow-[0_25px_60px_rgba(0,0,0,0.12)] border border-gray-100 p-8 md:p-10">
+            <div class="flex items-center justify-between mb-8 pb-6 border-b border-gray-100">
+              <p class="text-xs font-bold uppercase tracking-[0.25em] text-gray-400">MISSION PASS / 03</p>
+              <span class="inline-flex items-center gap-2 text-xs font-bold text-jaga-orange"><span class="w-2 h-2 rounded-full bg-jaga-orange animate-pulse"></span> Pendaftaran Dibuka</span>
+            </div>
+            <div class="grid grid-cols-3 gap-4 mb-8 text-center">
+              <div>
+                <p class="text-2xl md:text-3xl font-black text-gray-900">3</p>
+                <p class="text-xs text-gray-500 font-semibold uppercase tracking-wider">Negara</p>
+              </div>
+              <div>
+                <p class="text-2xl md:text-3xl font-black text-gray-900">7</p>
+                <p class="text-xs text-gray-500 font-semibold uppercase tracking-wider">Hari</p>
+              </div>
+              <div>
+                <p class="text-2xl md:text-3xl font-black text-jaga-orange">30</p>
+                <p class="text-xs text-gray-500 font-semibold uppercase tracking-wider">Kuota</p>
+              </div>
+            </div>
+            <dl class="space-y-4 text-sm">
+              <div class="flex justify-between items-center pb-3 border-b border-gray-100">
+                <dt class="text-gray-500 font-medium">Tanggal</dt>
+                <dd class="text-gray-900 font-bold">11–17 Des 2026</dd>
+              </div>
+              <div class="flex justify-between items-center pb-3 border-b border-gray-100">
+                <dt class="text-gray-500 font-medium">Rute</dt>
+                <dd class="text-gray-900 font-bold text-right">Kuala Lumpur →<br>Singapura → Thailand</dd>
+              </div>
+              <div class="flex justify-between items-center pb-3 border-b border-gray-100">
+                <dt class="text-gray-500 font-medium">Agenda Edukasi</dt>
+                <dd class="text-gray-900 font-bold">Seminar · 4 sekolah</dd>
+              </div>
+              <div class="flex justify-between items-center">
+                <dt class="text-gray-500 font-medium">Tiket Pesawat</dt>
+                <dd class="text-gray-900 font-bold">Paket All-In tersedia</dd>
+              </div>
+            </dl>
+          </div>
+
         </div>
       </div>
-      <aside class="pass" aria-label="Ringkasan perjalanan">
-        <div class="pass-top"><span>MISSION PASS / 03</span><img src="/images/china/jagatrip-mark.png" width="702" height="764" alt=""></div>
-        <div class="route"><div><small>FROM</small><strong>KUL</strong><span>Kuala Lumpur</span></div><div class="rail"><i></i><b>3 NEGARA</b></div><div><small>TO</small><strong>SIN</strong><span>Singapura</span></div></div>
-        <div class="pass-cut"></div>
-        <dl><div><dt>Tanggal</dt><dd>11–17 Des 2026</dd></div><div><dt>Status</dt><dd><span class="live"></span> Pendaftaran dibuka</dd></div><div><dt>Agenda</dt><dd>Seminar · 4 sekolah · kampus</dd></div><div><dt>Kapasitas</dt><dd>30 delegasi</dd></div></dl>
-      </aside>
     </section>
 
-    <!-- STRIP -->
-    <section class="proof" aria-label="Fakta program">
-      <div><strong>3</strong><span>Negara ASEAN</span></div>
-      <div><strong>4</strong><span>Kunjungan Sekolah</span></div>
-      <div><strong>1</strong><span>Seminar Internasional</span></div>
-      <div><strong>30</strong><span>Kuota Peserta</span></div>
-    </section>
-
-    <!-- KONSEP -->
-    <section class="section intro" id="konsep">
-      <div class="section-head"><p class="kicker dark"><span></span> KONSEP PROGRAM</p><h2>Bukan sekadar jalan-jalan, bukan studi banding biasa.</h2><p>JAGATRIP #3 adalah ekspedisi benchmarking pendidikan yang memadukan pembelajaran lapangan, diplomasi budaya, dan wisata edukatif dalam satu perjalanan lintas tiga negara.</p></div>
-      <div class="reasons">
-        <article><span>01</span><h3>Praktik Terbaik ASEAN</h3><p>Menembus praktik pendidikan terbaik kawasan — dari sistem sekolah Malaysia & Thailand hingga ekosistem pendidikan modern Singapura.</p></article>
-        <article><span>02</span><h3>Inspirasi Nyata</h3><p>Setiap kunjungan dirancang untuk dibawa pulang sebagai inspirasi nyata bagi lembaga masing-masing peserta.</p></article>
-        <article><span>03</span><h3>Jejaring Lintas Negara</h3><p>Membangun relasi profesional dengan sesama praktisi pendidikan dan lembaga di tiga negara.</p></article>
+    <!-- ===================== STRIP / STATS ===================== -->
+    <section class="bg-jaga-orange text-white">
+      <div class="max-w-7xl mx-auto px-6 py-6 md:py-8 grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+        <div><p class="text-3xl md:text-4xl font-black">3</p><p class="text-xs md:text-sm font-semibold uppercase tracking-wider opacity-90">Negara ASEAN</p></div>
+        <div><p class="text-3xl md:text-4xl font-black">4</p><p class="text-xs md:text-sm font-semibold uppercase tracking-wider opacity-90">Kunjungan Sekolah</p></div>
+        <div><p class="text-3xl md:text-4xl font-black">1</p><p class="text-xs md:text-sm font-semibold uppercase tracking-wider opacity-90">Seminar Internasional</p></div>
+        <div><p class="text-3xl md:text-4xl font-black">30</p><p class="text-xs md:text-sm font-semibold uppercase tracking-wider opacity-90">Kuota Peserta</p></div>
       </div>
     </section>
 
-    <!-- BANNER BENCHMARKING -->
-    <section class="banner">
-      <div class="banner-inner">
-        <div class="banner-ico">🎓</div>
-        <div>
-          <h3>Benchmarking Pendidikan yang Membekas</h3>
-          <p>Setiap agenda disusun agar peserta pulang membawa wawasan terapan — bukan sekadar dokumentasi perjalanan, tetapi bekal nyata untuk lembaga masing-masing.</p>
+    <!-- ===================== KONSEP ===================== -->
+    <section id="konsep" class="py-24 bg-white">
+      <div class="max-w-5xl mx-auto px-6">
+        <div class="text-center mb-16">
+          <span class="inline-block py-2 px-5 rounded-full bg-jaga-orange/10 text-jaga-orange font-bold text-xs uppercase tracking-[0.25em] mb-5">Konsep Program</span>
+          <h2 class="text-4xl md:text-6xl font-black text-gray-900 tracking-tight mb-6 leading-tight">
+            Bukan sekadar jalan-jalan,<br><span class="text-jaga-orange">bukan studi banding biasa.</span>
+          </h2>
+          <p class="text-lg md:text-xl text-gray-600 font-medium max-w-3xl mx-auto leading-relaxed">
+            Ekspedisi benchmarking pendidikan yang memadukan pembelajaran lapangan, diplomasi budaya, dan wisata edukatif dalam satu perjalanan lintas tiga negara.
+          </p>
+        </div>
+        <div class="grid md:grid-cols-3 gap-6">
+          <div class="bg-jaga-bg border border-gray-100 rounded-3xl p-8 hover:shadow-md transition-shadow">
+            <p class="text-5xl font-black text-jaga-orange mb-3">01</p>
+            <h3 class="text-xl font-black text-gray-900 mb-2">Praktik Terbaik ASEAN</h3>
+            <p class="text-gray-600 leading-relaxed">Menembus praktik pendidikan terbaik kawasan — dari Malaysia &amp; Thailand hingga Singapura.</p>
+          </div>
+          <div class="bg-jaga-bg border border-gray-100 rounded-3xl p-8 hover:shadow-md transition-shadow">
+            <p class="text-5xl font-black text-jaga-orange mb-3">02</p>
+            <h3 class="text-xl font-black text-gray-900 mb-2">Inspirasi Nyata</h3>
+            <p class="text-gray-600 leading-relaxed">Setiap kunjungan dirancang untuk dibawa pulang sebagai inspirasi nyata bagi lembaga peserta.</p>
+          </div>
+          <div class="bg-jaga-bg border border-gray-100 rounded-3xl p-8 hover:shadow-md transition-shadow">
+            <p class="text-5xl font-black text-jaga-orange mb-3">03</p>
+            <h3 class="text-xl font-black text-gray-900 mb-2">Jejaring Lintas Negara</h3>
+            <p class="text-gray-600 leading-relaxed">Membangun relasi profesional dengan sesama praktisi pendidikan dan lembaga di tiga negara.</p>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- KEUNGGULAN -->
-    <section class="section" id="keunggulan">
-      <div class="section-head"><p class="kicker dark"><span></span> KEUNGGULAN JAGATRIP #3</p><h2>Enam program dalam satu ekspedisi.</h2></div>
-      <div class="usp-grid">
-        <article><div class="usp-ico">🔬</div><h4>Benchmarking Sekolah</h4><p>Kunjungan langsung ke sekolah unggulan, bukan sekadar melihat dari luar.</p></article>
-        <article><div class="usp-ico">🎤</div><h4>Seminar Internasional</h4><p>Seminar bersama praktisi pendidikan di Kuala Lumpur.</p></article>
-        <article><div class="usp-ico">💬</div><h4>Workshop & Dialog</h4><p>Dialog interaktif di setiap kunjungan lembaga.</p></article>
-        <article><div class="usp-ico">🗺️</div><h4>City Tour Edukatif</h4><p>Menjelajah KLCC, Merlion, hingga Songkhla secara bermakna.</p></article>
-        <article><div class="usp-ico">🤝</div><h4>Networking Eksklusif</h4><p>Membangun jejaring lintas lembaga dan negara.</p></article>
-        <article><div class="usp-ico">🏛️</div><h4>Diplomasi Budaya</h4><p>Kunjungan budaya yang memperkaya perspektif peserta.</p></article>
+    <!-- ===================== BANNER BENCHMARKING ===================== -->
+    <section class="bg-jaga-orange">
+      <div class="max-w-5xl mx-auto px-6 py-12 md:py-14 text-center text-white">
+        <p class="text-4xl mb-4">🎓</p>
+        <h3 class="text-2xl md:text-3xl font-black mb-3">Benchmarking Pendidikan yang Membekas</h3>
+        <p class="text-base md:text-lg opacity-95 max-w-3xl mx-auto leading-relaxed">
+          Setiap agenda disusun agar peserta pulang membawa wawasan terapan — bukan sekadar dokumentasi perjalanan, tetapi bekal nyata untuk lembaga masing-masing.
+        </p>
       </div>
     </section>
 
-    <!-- DESTINASI -->
-    <section class="section dest-wrap" id="destinasi">
-      <div class="section-head"><p class="kicker dark"><span></span> DESTINASI</p><h2>Tiga negara, banyak titik bermakna.</h2></div>
-      <div class="dest-grid">
-        <article><span class="pin">📍</span><div><small class="flag">MALAYSIA</small><h4>Kuala Lumpur</h4><p>KLCC, Petronas, dan jantung metropolitan Malaysia.</p></div></article>
-        <article><span class="pin">📍</span><div><small class="flag">MALAYSIA</small><h4>Batu Caves & Genting</h4><p>Ikon wisata alam & dataran tinggi Genting Highland.</p></div></article>
-        <article><span class="pin">📍</span><div><small class="flag">MALAYSIA</small><h4>Johor Bahru</h4><p>Gerbang selatan & Masjid Temenggong Daeng Ibrahim.</p></div></article>
-        <article><span class="pin">📍</span><div><small class="flag">SINGAPURA</small><h4>Merlion & Jewel Changi</h4><p>Landmark Merlion, Bugis Street, dan keajaiban Jewel Changi.</p></div></article>
-        <article><span class="pin">📍</span><div><small class="flag">SINGAPURA</small><h4>Pulau Sentosa</h4><p>Photo stop Universal Studios & kawasan rekreasi Sentosa.</p></div></article>
-        <article><span class="pin">📍</span><div><small class="flag">THAILAND</small><h4>Hatyai & Songkhla</h4><p>Samila Beach, Masjid Songkhla, floating market & ASEAN night bazaar.</p></div></article>
+    <!-- ===================== KEUNGGULAN ===================== -->
+    <section id="keunggulan" class="py-24 bg-jaga-bg border-t border-gray-200">
+      <div class="max-w-6xl mx-auto px-6">
+        <div class="text-center mb-16">
+          <span class="inline-block py-2 px-5 rounded-full bg-jaga-orange/10 text-jaga-orange font-bold text-xs uppercase tracking-[0.25em] mb-5">Keunggulan</span>
+          <h2 class="text-4xl md:text-6xl font-black text-gray-900 tracking-tight mb-4">Enam Nilai Utama Program</h2>
+          <p class="text-lg text-gray-600 font-medium max-w-2xl mx-auto">Bukan trip biasa — setiap titik dirancang untuk pengalaman yang nempel.</p>
+        </div>
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {[
+            { icon: '🔬', title: 'Benchmarking Sekolah', body: 'Kunjungan langsung ke sekolah unggulan, bukan sekadar melihat dari luar.' },
+            { icon: '🎤', title: 'Seminar Internasional', body: 'Seminar bersama praktisi pendidikan di Kuala Lumpur.' },
+            { icon: '💬', title: 'Workshop & Dialog', body: 'Dialog interaktif di setiap kunjungan lembaga.' },
+            { icon: '🗺️', title: 'City Tour Edukatif', body: 'Menjelajah KLCC, Merlion, hingga Songkhla secara bermakna.' },
+            { icon: '🤝', title: 'Networking Eksklusif', body: 'Membangun jejaring lintas lembaga dan negara.' },
+            { icon: '🏛️', title: 'Diplomasi Budaya', body: 'Kunjungan budaya yang memperkaya perspektif peserta.' },
+          ].map((c) => (
+            <div class="bg-white border border-gray-100 rounded-3xl p-6 hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
+              <div class="w-14 h-14 rounded-2xl bg-jaga-orange/10 flex items-center justify-center text-2xl mb-4">{c.icon}</div>
+              <h3 class="text-lg font-black text-gray-900 mb-2">{c.title}</h3>
+              <p class="text-gray-600 text-sm leading-relaxed">{c.body}</p>
+            </div>
+          ))}
+        </div>
       </div>
     </section>
 
-    <!-- AGENDA EDUKASI -->
-    <section class="section edu-wrap" id="edukasi">
-      <div class="section-head light"><p class="kicker"><span></span> INTI PROGRAM</p><h2>Agenda benchmarking pendidikan.</h2></div>
-      <div class="edu-grid">
-        <article><span class="k">01</span><h4>Seminar Internasional</h4><p>Seminar bersama Seeds Premier, Hotel Pudu Plaza — Kuala Lumpur.</p></article>
-        <article><span class="k">04</span><h4>Kunjungan Sekolah</h4><p>Empat sekolah tujuan di Malaysia & Thailand.</p></article>
-        <article><span class="k">01</span><h4>Kunjungan Kampus</h4><p>Kunjungan ke universitas untuk perspektif akademik.</p></article>
-        <article><span class="k">01</span><h4>Kelembagaan</h4><p>Kunjungan KJRI untuk networking kelembagaan (tentatif).</p></article>
+    <!-- ===================== DESTINASI ===================== -->
+    <section id="destinasi" class="py-24 bg-white">
+      <div class="max-w-6xl mx-auto px-6">
+        <div class="text-center mb-16">
+          <span class="inline-block py-2 px-5 rounded-full bg-jaga-orange/10 text-jaga-orange font-bold text-xs uppercase tracking-[0.25em] mb-5">Destinasi</span>
+          <h2 class="text-4xl md:text-6xl font-black text-gray-900 tracking-tight mb-4">Tiga Negara, Banyak Titik Bermakna</h2>
+        </div>
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+          {[
+            { flag: 'MALAYSIA', place: 'Kuala Lumpur', desc: 'KLCC, Petronas, dan jantung metropolitan Malaysia.' },
+            { flag: 'MALAYSIA', place: 'Batu Caves & Genting', desc: 'Ikon wisata alam & dataran tinggi Genting Highland.' },
+            { flag: 'MALAYSIA', place: 'Johor Bahru', desc: 'Gerbang selatan & Masjid Temenggong Daeng Ibrahim.' },
+            { flag: 'SINGAPURA', place: 'Merlion & Jewel Changi', desc: 'Landmark Merlion, Bugis Street, dan Jewel Changi.' },
+            { flag: 'SINGAPURA', place: 'Pulau Sentosa', desc: 'Photo stop Universal Studios & kawasan rekreasi Sentosa.' },
+            { flag: 'THAILAND', place: 'Hatyai & Songkhla', desc: 'Samila Beach, Masjid Songkhla, floating market & night bazaar.' },
+          ].map((d) => (
+            <div class="flex items-start gap-4 bg-jaga-bg border border-gray-100 rounded-2xl p-5">
+              <span class="text-2xl text-jaga-orange shrink-0">📍</span>
+              <div>
+                <p class="text-xs font-black uppercase tracking-wider text-jaga-orange mb-1">{d.flag}</p>
+                <h4 class="text-base font-black text-gray-900 mb-1">{d.place}</h4>
+                <p class="text-sm text-gray-600 leading-relaxed">{d.desc}</p>
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
     </section>
 
-    <!-- ITINERARY -->
-    <section class="section" id="itinerary">
-      <div class="section-head"><p class="kicker dark"><span></span> RENCANA PERJALANAN</p><h2>Itinerary 7 Hari 6 Malam.</h2><p>Gambaran perjalanan lintas tiga negara. Detail dapat berubah menyesuaikan kondisi lapangan.</p></div>
-      <div class="itin-grid">
-        <article><div class="itin-top"><span class="num">DAY 1</span><b class="route">KLIA → Johor Bahru</b></div><ul><li>Penjemputan di KLIA</li><li>Perjalanan menuju Johor Bahru</li><li>Check-in & waktu bebas</li></ul></article>
-        <article><div class="itin-top"><span class="num">DAY 2</span><b class="route">Singapura → Kuala Lumpur</b></div><ul><li>Jewel Changi & Merlion</li><li>Masjid & landmark Singapura</li><li>Pulau Sentosa (Universal Studios)</li><li>Perjalanan menuju Kuala Lumpur</li></ul></article>
-        <article><div class="itin-top"><span class="num">DAY 3</span><b class="route">Kuala Lumpur</b></div><ul><li>Seminar internasional (Pudu Plaza)</li><li>Kunjungan sekolah 1</li><li>KLCC & Masjid Jamek</li></ul></article>
-        <article><div class="itin-top"><span class="num">DAY 4</span><b class="route">KL → Thailand</b></div><ul><li>Batu Caves & Genting Highland</li><li>Kunjungan kampus / sekolah 2</li><li>Perjalanan menuju Thailand</li></ul></article>
-        <article><div class="itin-top"><span class="num">DAY 5</span><b class="route">Hatyai & Songkhla</b></div><ul><li>Kunjungan sekolah 3 & 4</li><li>Floating market & ASEAN night bazaar</li><li>Menginap di Songkhla</li></ul></article>
-        <article><div class="itin-top"><span class="num">DAY 6</span><b class="route">Songkhla → KLIA</b></div><ul><li>Samila Beach & Masjid Songkhla</li><li>KJRI Thailand (tentatif) & night bazaar</li><li>Perjalanan menuju KLIA</li></ul></article>
-        <article class="full"><div class="itin-top"><span class="num">DAY 7</span><b class="route">KLIA → Kota Asal</b></div><ul><li>Aktivitas di ruang tunggu bandara</li><li>Kepulangan ke kota asal masing-masing peserta</li></ul></article>
-      </div>
-      <div class="itin-note"><b>ℹ️ Catatan:</b> Itinerary dapat berubah sewaktu-waktu menyesuaikan kondisi lapangan. Hubungi admin JAGATRIP via WhatsApp untuk update berkala.</div>
-    </section>
-
-    <!-- PAKET -->
-    <section class="section pkg-wrap" id="paket">
-      <div class="section-head light"><p class="kicker"><span></span> INVESTASI PROGRAM</p><h2>Pilihan Paket Keikutsertaan.</h2><p>Dua skema fleksibel sesuai kebutuhan peserta. Pilih paket, formulir akan otomatis terisi.</p></div>
-      <div class="pkg-grid">
-        <article class="pkg">
-          <h3>Land Tour</h3>
-          <p class="pkg-sub">Belum termasuk tiket pesawat. Peserta menuju KLIA secara mandiri.</p>
-          <div class="pkg-amount">Rp 8.900.000<small>/peserta</small></div>
-          <ul>
-            <li>Hotel 6 malam & sarapan</li>
-            <li>Transport & tour guide profesional</li>
-            <li>Agenda edukasi & seminar internasional</li>
-            <li>4 edu-visit sekolah & kampus</li>
-            <li>Program city tour tiga negara</li>
-            <li class="no">Tiket pesawat PP</li>
-          </ul>
-          <a href="#form" class="pkg-btn ghost" data-paket="Land Tour">Pilih Land Tour</a>
-        </article>
-        <article class="pkg featured">
-          <span class="ribbon">PALING PRAKTIS</span>
-          <h3>All-In</h3>
-          <p class="pkg-sub">Termasuk tiket pesawat PP ex-CGK (Jakarta). Tinggal berangkat.</p>
-          <div class="pkg-amount">Rp 12.900.000<small>/peserta</small></div>
-          <ul>
-            <li>Seluruh fasilitas Land Tour</li>
-            <li>Tiket pesawat PP ex-CGK (Jakarta)</li>
-            <li>Handling bandara terpusat</li>
-            <li>Koordinasi keberangkatan terpusat</li>
-            <li>Penerbangan grup terjadwal</li>
-          </ul>
-          <a href="#form" class="pkg-btn" data-paket="All-In">Pilih All-In</a>
-        </article>
-      </div>
-      <p class="pkg-note">*Harga dapat berubah sewaktu-waktu. Hubungi admin untuk konfirmasi ketersediaan slot.</p>
-    </section>
-
-    <!-- FORM -->
-    <section class="form-section" id="form">
-      <div class="form-copy"><p class="kicker"><span></span> PENDAFTARAN</p><h2>Amankan kursi Anda di JAGATRIP #3.</h2><p>Isi data singkat berikut. Setelah dikirim, WhatsApp admin terbuka dengan pesan yang sudah disiapkan untuk konfirmasi & langkah selanjutnya.</p><div class="quota"><strong>30</strong><span>kursi<br/>delegasi</span></div></div>
-      <form class="lead-form" id="batch3-form" novalidate>
-        <label>Nama Lengkap<input name="nama" required minlength="3" autocomplete="name" placeholder="Nama sesuai paspor"></label>
-        <label>Instansi / Lembaga<input name="instansi" required minlength="2" autocomplete="organization" placeholder="Sekolah / yayasan / instansi"></label>
-        <label>Domisili<input name="domisili" required minlength="2" placeholder="Kota / kabupaten"></label>
-        <label>Nomor WhatsApp<input name="wa" type="tel" required pattern="[0-9+() -]{8,20}" inputmode="tel" autocomplete="tel" placeholder="0812 3456 7890"></label>
-        <label>Paket<select name="paket" id="paket-select"><option value="Land Tour">Land Tour — Rp 8.900.000</option><option value="All-In">All-In — Rp 12.900.000</option></select></label>
-        <button type="submit">Kirim & buka WhatsApp</button>
-        <div id="batch3-status" class="form-status hidden"></div>
-        <small>Data Anda hanya digunakan untuk keperluan pendaftaran & diteruskan via WhatsApp.</small>
-      </form>
-    </section>
-
-    <!-- FAQ -->
-    <section class="section faq" id="faq">
-      <div class="section-head"><p class="kicker dark"><span></span> FAQ</p><h2>Pertanyaan yang sering ditanyakan.</h2></div>
-      <div class="faq-list">
-        <details><summary>Apakah tiket pesawat termasuk?<span></span></summary><p>Tergantung paket. Land Tour belum termasuk (menuju KLIA mandiri), sedangkan All-In sudah termasuk tiket pesawat PP ex-CGK Jakarta.</p></details>
-        <details><summary>Bisakah berangkat dari luar Jakarta?<span></span></summary><p>Bisa. Untuk paket All-In, titik keberangkatan grup dari CGK. Peserta luar Jakarta dapat menyesuaikan penerbangan menuju titik kumpul — silakan diskusikan via WhatsApp saat mengisi formulir.</p></details>
-        <details><summary>Dokumen apa yang diperlukan?<span></span></summary><p>Paspor aktif minimal berlaku 6 bulan. Tim kami akan memandu kelengkapan dokumen wisata setelah pendaftaran.</p></details>
-        <details><summary>Bagaimana skema pembayarannya?<span></span></summary><p>Pendaftaran diawali pengisian formulir ini. Tim kami akan menghubungi Anda untuk skema pembayaran & konfirmasi slot.</p></details>
-        <details><summary>Apakah kunjungan sekolah dijamin?<span></span></summary><p>Agenda kunjungan sekolah/kampus disusun bersama mitra setempat. Detail dapat menyesuaikan ketersediaan dan kondisi lapangan.</p></details>
+    <!-- ===================== AGENDA EDUKASI ===================== -->
+    <section id="edukasi" class="py-24 bg-gray-900 text-white">
+      <div class="max-w-6xl mx-auto px-6">
+        <div class="text-center mb-16">
+          <span class="inline-block py-2 px-5 rounded-full bg-jaga-orange text-white font-bold text-xs uppercase tracking-[0.25em] mb-5">Inti Program</span>
+          <h2 class="text-4xl md:text-6xl font-black tracking-tight mb-4">Agenda Benchmarking Pendidikan</h2>
+        </div>
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {[
+            { k: '01', title: 'Seminar Internasional', body: 'Bersama praktisi pendidikan di Kuala Lumpur.' },
+            { k: '04', title: 'Kunjungan Sekolah', body: 'Empat sekolah tujuan di Malaysia & Thailand.' },
+            { k: '01', title: 'Kunjungan Kampus', body: 'Universitas untuk perspektif akademik.' },
+            { k: '01', title: 'Kelembagaan', body: 'Kunjungan KJRI untuk networking (tentatif).' },
+          ].map((e) => (
+            <div class="bg-white/5 border border-white/10 rounded-3xl p-6">
+              <p class="text-5xl font-black text-jaga-orange mb-3">{e.k}</p>
+              <h4 class="text-lg font-black mb-2">{e.title}</h4>
+              <p class="text-sm text-gray-300 leading-relaxed">{e.body}</p>
+            </div>
+          ))}
+        </div>
       </div>
     </section>
+
+    <!-- ===================== ITINERARY ===================== -->
+    <section id="itinerary" class="py-24 bg-jaga-bg border-t border-gray-200">
+      <div class="max-w-6xl mx-auto px-6">
+        <div class="text-center mb-16">
+          <span class="inline-block py-2 px-5 rounded-full bg-jaga-orange/10 text-jaga-orange font-bold text-xs uppercase tracking-[0.25em] mb-5">Itinerary</span>
+          <h2 class="text-4xl md:text-6xl font-black text-gray-900 tracking-tight mb-4">7 Hari 6 Malam</h2>
+          <p class="text-lg text-gray-600 font-medium max-w-2xl mx-auto">Gambaran perjalanan lintas tiga negara. Detail dapat menyesuaikan kondisi lapangan.</p>
+        </div>
+        <div class="grid md:grid-cols-2 gap-5">
+          {[
+            { day: 'DAY 1', route: 'KLIA → Johor Bahru', items: ['Penjemputan di KLIA', 'Perjalanan menuju Johor Bahru', 'Check-in & waktu bebas'] },
+            { day: 'DAY 2', route: 'Singapura → Kuala Lumpur', items: ['Jewel Changi & Merlion', 'Masjid & landmark Singapura', 'Pulau Sentosa (Universal Studios)', 'Perjalanan menuju Kuala Lumpur'] },
+            { day: 'DAY 3', route: 'Kuala Lumpur', items: ['Seminar internasional (Pudu Plaza)', 'Kunjungan sekolah 1', 'KLCC & Masjid Jamek'] },
+            { day: 'DAY 4', route: 'KL → Thailand', items: ['Batu Caves & Genting Highland', 'Kunjungan kampus / sekolah 2', 'Perjalanan menuju Thailand'] },
+            { day: 'DAY 5', route: 'Hatyai & Songkhla', items: ['Kunjungan sekolah 3 & 4', 'Floating market & ASEAN night bazaar', 'Menginap di Songkhla'] },
+            { day: 'DAY 6', route: 'Songkhla → KLIA', items: ['Samila Beach & Masjid Songkhla', 'KJRI Thailand (tentatif) & night bazaar', 'Perjalanan menuju KLIA'] },
+            { day: 'DAY 7', route: 'KLIA → Kota Asal', items: ['Aktivitas di ruang tunggu bandara', 'Kepulangan ke kota asal masing-masing peserta'] },
+          ].map((d) => (
+            <div class="bg-white border border-gray-100 rounded-3xl p-6 hover:shadow-md transition-shadow">
+              <div class="flex items-center gap-3 mb-4">
+                <span class="bg-jaga-orange text-white font-black text-sm px-3 py-2 rounded-xl shrink-0">{d.day}</span>
+                <span class="text-jaga-orange font-bold text-sm">{d.route}</span>
+              </div>
+              <ul class="space-y-2">
+                {d.items.map((it) => (
+                  <li class="flex items-start gap-2 text-sm text-gray-700">
+                    <span class="text-jaga-orange mt-1 shrink-0">●</span>
+                    <span>{it}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+        <div class="mt-8 bg-jaga-orange/5 border border-dashed border-jaga-orange/40 rounded-2xl p-5 text-sm text-gray-700 text-center">
+          <strong class="text-jaga-orange">ℹ️ Catatan:</strong> Itinerary dapat berubah sewaktu-waktu menyesuaikan kondisi lapangan. Hubungi admin via WhatsApp untuk update berkala.
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== PAKET ===================== -->
+    <section id="paket" class="py-24 bg-white border-t border-gray-200">
+      <div class="max-w-5xl mx-auto px-6">
+        <div class="text-center mb-16">
+          <span class="inline-block py-2 px-5 rounded-full bg-jaga-orange/10 text-jaga-orange font-bold text-xs uppercase tracking-[0.25em] mb-5">Investasi Program</span>
+          <h2 class="text-4xl md:text-6xl font-black text-gray-900 tracking-tight mb-4">Pilihan Paket Keikutsertaan</h2>
+          <p class="text-lg text-gray-600 font-medium max-w-2xl mx-auto">Pilih paket, formulir pendaftaran akan otomatis terisi pilihan Anda.</p>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-6 items-start">
+          <!-- Land Tour -->
+          <div class="bg-jaga-bg border border-gray-200 rounded-4xl p-8">
+            <h3 class="text-2xl font-black text-gray-900 mb-2">Paket Land Tour</h3>
+            <p class="text-sm text-gray-500 mb-6">Belum termasuk tiket pesawat. Peserta menuju KLIA secara mandiri.</p>
+            <p class="text-4xl md:text-5xl font-black text-gray-900 mb-1">Rp 8.900.000<span class="text-base font-bold text-gray-500"> / peserta</span></p>
+            <ul class="space-y-3 my-6">
+              {['Hotel 6 malam & sarapan', 'Transport & tour guide profesional', 'Agenda edukasi & seminar internasional', '4 edu-visit sekolah & kampus', 'Program city tour tiga negara'].map((f) => (
+                <li class="flex items-start gap-3 text-sm text-gray-800">
+                  <span class="text-jaga-orange font-black shrink-0">✓</span><span>{f}</span>
+                </li>
+              ))}
+              <li class="flex items-start gap-3 text-sm text-gray-400">
+                <span class="text-red-500 font-black shrink-0">×</span><span class="line-through">Tiket pesawat PP</span>
+              </li>
+            </ul>
+            <a href="#form" data-paket="Land Tour" class="paket-pick block text-center w-full border-2 border-gray-900 text-gray-900 hover:bg-gray-900 hover:text-white px-6 py-4 rounded-full font-bold transition-all duration-300">
+              Pilih Land Tour
+            </a>
+          </div>
+
+          <!-- All-In (featured) -->
+          <div class="relative bg-white border-2 border-jaga-orange rounded-4xl p-8 shadow-[0_25px_60px_rgba(232,97,31,0.18)] md:scale-[1.02]">
+            <span class="absolute -top-3 left-1/2 -translate-x-1/2 bg-jaga-orange text-white font-black text-xs uppercase tracking-widest px-5 py-1.5 rounded-full shadow-md">🔥 Paling Praktis</span>
+            <h3 class="text-2xl font-black text-gray-900 mb-2">Paket All-In</h3>
+            <p class="text-sm text-gray-500 mb-6">Termasuk tiket pesawat PP ex-CGK (Jakarta). Tinggal berangkat.</p>
+            <p class="text-4xl md:text-5xl font-black text-jaga-orange mb-1">Rp 12.900.000<span class="text-base font-bold text-gray-500"> / peserta</span></p>
+            <ul class="space-y-3 my-6">
+              {['Seluruh fasilitas Land Tour', 'Tiket pesawat PP ex-CGK (Jakarta)', 'Handling bandara terpusat', 'Koordinasi keberangkatan terpusat', 'Penerbangan grup terjadwal'].map((f) => (
+                <li class="flex items-start gap-3 text-sm text-gray-800">
+                  <span class="text-jaga-orange font-black shrink-0">✓</span><span>{f}</span>
+                </li>
+              ))}
+            </ul>
+            <a href="#form" data-paket="All-In" class="paket-pick block text-center w-full bg-jaga-orange hover:bg-jaga-orange-600 text-white px-6 py-4 rounded-full font-bold shadow-lg hover:shadow-xl transition-all duration-300">
+              Pilih All-In
+            </a>
+          </div>
+        </div>
+
+        <p class="text-center text-xs text-gray-500 mt-8">*Harga dapat berubah sewaktu-waktu. Hubungi admin untuk konfirmasi ketersediaan slot.</p>
+      </div>
+    </section>
+
+    <!-- ===================== FORM PENDAFTARAN ===================== -->
+    <section id="form" class="py-20 md:py-28 bg-linear-to-br from-gray-900 via-gray-800 to-gray-900 text-white relative overflow-hidden">
+      <div class="absolute top-10 right-10 w-64 h-64 bg-jaga-orange/10 rounded-full blur-3xl"></div>
+      <div class="absolute bottom-10 left-10 w-80 h-80 bg-jaga-orange/10 rounded-full blur-3xl"></div>
+
+      <div class="max-w-6xl mx-auto px-6 relative z-10">
+        <div class="grid lg:grid-cols-2 gap-12 items-start">
+
+          <div class="lg:sticky lg:top-32">
+            <span class="inline-block bg-jaga-orange text-white font-black text-xs md:text-sm uppercase tracking-[0.3em] px-5 py-2 rounded-full mb-6 shadow-lg">📝 Form Pendaftaran</span>
+            <h2 class="text-3xl md:text-5xl font-black tracking-tight leading-tight mb-6">
+              Amankan Kursi Anda di <span class="text-jaga-orange">JAGATRIP #3</span>
+            </h2>
+            <p class="text-lg md:text-xl text-gray-300 leading-relaxed mb-8">
+              Kuota terbatas hanya 30 peserta. Isi formulir singkat berikut, data tersimpan otomatis lalu Anda diarahkan ke WhatsApp admin untuk konfirmasi.
+            </p>
+            <ul class="space-y-4 text-base text-gray-300">
+              <li class="flex items-start gap-3">
+                <span class="shrink-0 w-8 h-8 rounded-full bg-jaga-orange/20 flex items-center justify-center text-jaga-orange font-black text-sm mt-0.5">1</span>
+                <div><p class="font-bold text-white">Pilih paket &amp; isi formulir</p><p class="text-sm text-gray-400">Data tersimpan otomatis ke sistem kami</p></div>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="shrink-0 w-8 h-8 rounded-full bg-jaga-orange/20 flex items-center justify-center text-jaga-orange font-black text-sm mt-0.5">2</span>
+                <div><p class="font-bold text-white">Konfirmasi via WhatsApp</p><p class="text-sm text-gray-400">Otomatis redirect ke WhatsApp admin</p></div>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="shrink-0 w-8 h-8 rounded-full bg-jaga-orange/20 flex items-center justify-center text-jaga-orange font-black text-sm mt-0.5">3</span>
+                <div><p class="font-bold text-white">Admin follow-up</p><p class="text-sm text-gray-400">Diskusi detail program &amp; pembayaran</p></div>
+              </li>
+            </ul>
+          </div>
+
+          <div class="bg-white text-gray-900 rounded-4xl p-6 md:p-8 shadow-[0_25px_60px_rgba(0,0,0,0.4)]">
+            <p class="text-xl md:text-2xl font-black text-gray-900 mb-1">Formulir Pendaftaran</p>
+            <p class="text-sm text-gray-500 mb-6">Lengkapi data berikut untuk mendaftar JAGATRIP #3.</p>
+
+            <form id="batch3-form" novalidate class="space-y-3">
+              <div>
+                <label for="b3-nama" class="block text-xs font-bold text-gray-600 uppercase tracking-wider mb-1">Nama Lengkap *</label>
+                <input id="b3-nama" name="nama" type="text" required placeholder="Nama sesuai paspor" class="w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:border-jaga-orange focus:outline-none text-gray-900 placeholder:text-gray-400 text-sm font-medium transition-colors bg-white" />
+              </div>
+              <div>
+                <label for="b3-instansi" class="block text-xs font-bold text-gray-600 uppercase tracking-wider mb-1">Instansi / Lembaga *</label>
+                <input id="b3-instansi" name="instansi" type="text" required placeholder="Sekolah / yayasan / instansi" class="w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:border-jaga-orange focus:outline-none text-gray-900 placeholder:text-gray-400 text-sm font-medium transition-colors bg-white" />
+              </div>
+              <div>
+                <label for="b3-domisili" class="block text-xs font-bold text-gray-600 uppercase tracking-wider mb-1">Domisili *</label>
+                <input id="b3-domisili" name="domisili" type="text" required placeholder="Kota / kabupaten" class="w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:border-jaga-orange focus:outline-none text-gray-900 placeholder:text-gray-400 text-sm font-medium transition-colors bg-white" />
+              </div>
+              <div>
+                <label for="b3-wa" class="block text-xs font-bold text-gray-600 uppercase tracking-wider mb-1">No. WhatsApp *</label>
+                <input id="b3-wa" name="wa" type="tel" required inputmode="numeric" placeholder="0812 3456 7890" class="w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:border-jaga-orange focus:outline-none text-gray-900 placeholder:text-gray-400 text-sm font-medium transition-colors bg-white" />
+              </div>
+              <div>
+                <label for="b3-paket" class="block text-xs font-bold text-gray-600 uppercase tracking-wider mb-1">Paket Terpilih</label>
+                <select id="b3-paket" name="paket" class="w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:border-jaga-orange focus:outline-none text-gray-900 text-sm font-medium transition-colors bg-white">
+                  <option value="Land Tour">Land Tour — Rp 8.900.000</option>
+                  <option value="All-In">All-In — Rp 12.900.000</option>
+                </select>
+              </div>
+
+              <button type="submit" class="w-full bg-jaga-orange hover:bg-jaga-orange-600 text-white font-black text-base md:text-lg py-4 rounded-full shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-0.5 mt-4">
+                Kirim &amp; Lanjut ke WhatsApp →
+              </button>
+              <div id="batch3-status" class="hidden text-center text-sm font-bold"></div>
+              <p class="text-xs text-gray-400 text-center mt-3 leading-relaxed">🔒 Data aman &amp; tersimpan otomatis. Setelah submit, Anda diarahkan ke WhatsApp admin.</p>
+            </form>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== FAQ ===================== -->
+    <section id="faq" class="py-24 bg-jaga-bg border-t border-gray-200">
+      <div class="max-w-3xl mx-auto px-6">
+        <div class="text-center mb-12">
+          <span class="inline-block py-2 px-5 rounded-full bg-jaga-orange/10 text-jaga-orange font-bold text-xs uppercase tracking-[0.25em] mb-5">FAQ</span>
+          <h2 class="text-4xl md:text-5xl font-black text-gray-900 tracking-tight">Pertanyaan Umum</h2>
+        </div>
+        <div class="space-y-3">
+          {[
+            { q: 'Apakah tiket pesawat termasuk?', a: 'Tergantung paket. Land Tour belum termasuk (menuju KLIA mandiri), All-In sudah termasuk tiket pesawat PP ex-CGK Jakarta.' },
+            { q: 'Bisakah berangkat dari luar Jakarta?', a: 'Bisa. Paket All-In titik keberangkatan grup dari CGK. Peserta luar Jakarta dapat menyesuaikan penerbangan menuju titik kumpul.' },
+            { q: 'Dokumen apa yang diperlukan?', a: 'Paspor aktif minimal berlaku 6 bulan. Tim kami memandu kelengkapan dokumen wisata setelah pendaftaran.' },
+            { q: 'Bagaimana skema pembayarannya?', a: 'Pendaftaran diawali pengisian formulir ini. Tim kami menghubungi Anda untuk skema pembayaran & konfirmasi slot.' },
+            { q: 'Apakah kunjungan sekolah dijamin?', a: 'Agenda kunjungan disusun bersama mitra setempat. Detail dapat menyesuaikan ketersediaan dan kondisi lapangan.' },
+          ].map((f) => (
+            <details class="group bg-white border border-gray-200 rounded-2xl overflow-hidden">
+              <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 font-bold text-gray-900">
+                <span>{f.q}</span>
+                <span class="text-jaga-orange text-2xl font-black transition-transform group-open:rotate-45 shrink-0">+</span>
+              </summary>
+              <p class="px-5 pb-5 text-gray-600 leading-relaxed text-sm">{f.a}</p>
+            </details>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== CTA BANNER ===================== -->
+    <section class="py-16 md:py-20 bg-white">
+      <div class="max-w-5xl mx-auto px-6">
+        <div class="bg-jaga-orange rounded-4xl p-10 md:p-14 shadow-xl text-center text-white">
+          <h2 class="text-3xl md:text-4xl font-black tracking-tight mb-4">Siap melangkah lintas negara?</h2>
+          <p class="text-base md:text-lg opacity-95 mb-8 max-w-2xl mx-auto">Amankan kursi Anda di JAGATRIP #3 sebelum kuota habis.</p>
+          <a href="#form" class="inline-block bg-white text-jaga-orange px-10 py-4 rounded-full font-black text-base md:text-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+            Daftar Sekarang →
+          </a>
+        </div>
+      </div>
+    </section>
+
   </main>
 
-  <footer><img src="/images/china/jagatrip-logo.png" width="2094" height="570" alt="JAGATRIP Mitra Edukasi"><p>© 2026 PT Jagatrip Mitra Edukasi</p><div><a href="/privacy">Privasi</a><a href="/terms">Syarat & Ketentuan</a></div></footer>
+  <Footer />
 
   <script>
     import { SITE } from '../data/site';
@@ -189,9 +444,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
     const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwrwCUYnuIUCflczefMlYAHdCnOD-5PMqVEL94QTPWy6Hkds6SiOQLfyo7PZpVoqtjiZg/exec';
 
-    const select = document.getElementById('paket-select') as HTMLSelectElement | null;
-
-    // Pilihan paket -> preselect di form (scroll ditangani native href="#form")
+    // Pilihan paket dari kartu -> preselect form
+    const select = document.getElementById('b3-paket') as HTMLSelectElement | null;
     document.querySelectorAll<HTMLAnchorElement>('[data-paket]').forEach((el) => {
       el.addEventListener('click', () => {
         const paket = el.dataset.paket;
@@ -201,7 +455,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
     const form = document.getElementById('batch3-form') as HTMLFormElement | null;
     if (form) {
-      const btn = form.querySelector('button')!;
+      const btn = form.querySelector<HTMLButtonElement>('button[type="submit"]')!;
       const status = document.getElementById('batch3-status')!;
 
       form.addEventListener('submit', (e) => {
@@ -219,7 +473,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           return;
         }
 
-        btn.disabled = true; btn.textContent = '⏳ Mengirim...';
+        btn.disabled = true;
+        btn.textContent = '⏳ Mengirim...';
 
         fetch(APPS_SCRIPT_URL, {
           method: 'POST', mode: 'no-cors',
@@ -237,179 +492,3 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     }
   </script>
 </BaseLayout>
-
-<style>
-  :global(body){background:#faf7f2;color:#211b17;font-family:Outfit,ui-sans-serif,sans-serif} :global(*){box-sizing:border-box}
-  .nav{height:72px;padding:0 max(24px,calc((100vw - 1160px)/2));display:flex;align-items:center;justify-content:space-between;background:rgba(250,247,242,.92);backdrop-filter:blur(14px);position:sticky;top:0;z-index:20;border-bottom:1px solid #ded7ce}
-  .nav img,footer img{display:block;width:170px;height:auto}
-  .nav-cta,.button,.lead-form button,.pkg-btn{background:#E8611F;color:white;border:0;border-radius:2px;text-decoration:none;font-weight:800;padding:13px 20px;transition:.2s}
-  .nav-cta:hover,.primary:hover,.lead-form button:hover,.pkg-btn:hover{background:#b94717;transform:translateY(-2px)}
-
-  .hero{max-width:1160px;margin:auto;padding:56px 24px 60px;display:grid;grid-template-columns:1.12fr .88fr;gap:48px;align-items:center}
-  .flags{font-size:22px;letter-spacing:2px;margin:0 0 14px}
-  .kicker{display:flex;align-items:center;gap:10px;font-size:12px;font-weight:800;letter-spacing:.16em;color:#8e3b1a;margin:0 0 22px}
-  .kicker span{width:28px;height:2px;background:#c99a35}
-  .form-section .kicker,.pkg-wrap .kicker,.edu-wrap .kicker{color:#fff}
-  .hero h1{font-size:clamp(42px,5.4vw,68px);line-height:1;letter-spacing:-.05em;margin:0;max-width:760px}
-  .hero h1 em{font-family:Georgia,serif;font-weight:400;color:#b4232d}
-  .hero-lead{font-size:18px;line-height:1.65;color:#665d56;max-width:640px;margin:26px 0}
-  .actions{display:flex;gap:12px;align-items:center;margin-bottom:28px}
-  .button{display:inline-flex;align-items:center;justify-content:center;min-height:50px}
-  .secondary{background:transparent;color:#211b17;border:1px solid #bdb4aa}
-  .secondary:hover{border-color:#E8611F;color:#E8611F}
-  .secondary span{margin-left:16px}
-  .hero-badges{display:flex;flex-wrap:wrap;gap:10px}
-  .badge{display:flex;align-items:center;gap:8px;background:#fff;border:1px solid #e7e1d8;border-radius:12px;padding:10px 14px;font-size:13px;box-shadow:0 6px 20px rgba(18,34,57,.06)}
-  .badge span{font-size:15px}
-
-  .pass{background:#211b17;color:white;padding:28px;clip-path:polygon(0 0,calc(100% - 18px) 0,100% 18px,100% 100%,18px 100%,0 calc(100% - 18px));box-shadow:18px 18px 0 #E8611F;position:relative}
-  .pass-top{display:flex;justify-content:space-between;align-items:center;font-size:11px;letter-spacing:.16em;color:#cfc5bb}
-  .pass-top img{width:42px;height:46px;object-fit:contain;filter:brightness(0) invert(1);opacity:.8}
-  .route{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;align-items:center;margin:42px 0 34px}
-  .route div:last-child{text-align:right}
-  .route small,.route span{display:block;color:#aaa096;font-size:11px}
-  .route strong{display:block;font-size:46px;line-height:1;letter-spacing:-.06em}
-  .rail{display:flex!important;align-items:center;position:relative}
-  .rail i{display:block;width:100%;border-top:1px dashed #c99a35}
-  .rail b{position:absolute;left:50%;transform:translateX(-50%);background:#211b17;padding:6px;color:#c99a35;font-size:10px;white-space:nowrap}
-  .pass-cut{border-top:1px dashed #766d66;margin:0 -28px}
-  .pass dl{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin:28px 0 0}
-  .pass dl div{border-left:2px solid #E8611F;padding-left:12px}
-  .pass dt{font-size:10px;letter-spacing:.14em;color:#9d938a;text-transform:uppercase}
-  .pass dd{margin:5px 0 0;font-size:14px;font-weight:700}
-  .live{display:inline-block;width:7px;height:7px;border-radius:50%;background:#E8611F}
-
-  .proof{background:#E8611F;color:white;display:grid;grid-template-columns:repeat(4,1fr);padding:0 max(24px,calc((100vw - 1160px)/2))}
-  .proof div{padding:26px 24px;border-right:1px solid rgba(255,255,255,.25);display:flex;align-items:baseline;gap:12px}
-  .proof div:last-child{border-right:0}
-  .proof strong{font:700 40px Georgia,serif}
-  .proof span{font-size:13px}
-
-  .section{padding:56px max(24px,calc((100vw - 1160px)/2))}
-  .section-head{display:grid;grid-template-columns:1fr 1.4fr;gap:24px;margin-bottom:44px}
-  .section-head .kicker{grid-column:1/-1;margin-bottom:0}
-  .section-head h2{font-size:clamp(34px,4.4vw,52px);line-height:1.02;letter-spacing:-.04em;margin:0;color:#122239}
-  .section-head>p:last-child{font-size:16px;line-height:1.7;color:#71675f;margin:0;max-width:540px}
-
-  .reasons{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid #cfc6bc}
-  .reasons article{padding:28px 28px 12px 0;border-right:1px solid #cfc6bc}
-  .reasons article:last-child{border-right:0}
-  .reasons span{color:#b4232d;font-weight:800}
-  .reasons h3{font-size:21px;margin:26px 0 12px;color:#122239}
-  .reasons p{color:#71675f;line-height:1.65}
-
-  .banner{background:linear-gradient(100deg,#E8611F,#b94717);color:#fff}
-  .banner-inner{max-width:1160px;margin:auto;padding:34px max(24px,calc((100vw - 1160px)/2));display:flex;gap:24px;align-items:center}
-  .banner-ico{font-size:44px}
-  .banner h3{color:#fff;font-size:24px;margin:0 0 6px}
-  .banner p{margin:0;opacity:.95;max-width:760px;line-height:1.6}
-
-  .usp-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-  .usp-grid article{background:#fff;border:1px solid #e7e1d8;border-radius:14px;padding:24px;transition:.2s}
-  .usp-grid article:hover{border-color:#E8611F;transform:translateY(-3px);box-shadow:0 12px 30px rgba(18,34,57,.08)}
-  .usp-ico{width:48px;height:48px;border-radius:12px;background:#FFF1E8;display:grid;place-items:center;font-size:22px;margin-bottom:12px}
-  .usp-grid h4{font-size:17px;margin:0 0 6px;color:#122239}
-  .usp-grid p{color:#71675f;font-size:14px;margin:0}
-
-  .dest-wrap{background:#FBF7F1}
-  .dest-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-  .dest-grid article{background:#fff;border:1px solid #e7e1d8;border-radius:14px;padding:18px;display:flex;gap:14px;align-items:flex-start}
-  .dest-grid .pin{color:#E8611F;font-size:18px}
-  .dest-grid .flag{font-size:11px;font-weight:800;color:#0E8F8A;letter-spacing:.06em}
-  .dest-grid h4{font-size:16px;margin:2px 0 4px;color:#122239}
-  .dest-grid p{font-size:13.5px;color:#71675f;margin:0}
-
-  .edu-wrap{background:#211b17;color:#fff}
-  .edu-wrap .section-head h2{color:#fff}
-  .edu-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
-  .edu-grid article{background:#2a231f;border-radius:14px;padding:22px}
-  .edu-grid .k{font:800 34px Georgia,serif;color:#E8611F}
-  .edu-grid h4{color:#fff;font-size:16px;margin:8px 0 6px}
-  .edu-grid p{font-size:13.5px;color:#c8d3e0;margin:0}
-
-  .itin-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
-  .itin-grid article{background:#fff;border:1px solid #e7e1d8;border-radius:14px;padding:20px}
-  .itin-grid article.full{grid-column:1/-1}
-  .itin-top{display:flex;align-items:center;gap:14px;margin-bottom:10px}
-  .itin-top .num{background:#E8611F;color:#fff;font-weight:800;border-radius:8px;padding:8px 12px;font-size:13px;flex-shrink:0}
-  .itin-top .route{color:#0E8F8A;font-weight:700;font-size:15px}
-  .itin-grid ul{list-style:none;margin:0;padding:0}
-  .itin-grid li{position:relative;padding-left:18px;font-size:14px;color:#71675f;margin-bottom:5px}
-  .itin-grid li::before{content:'';position:absolute;left:0;top:8px;width:7px;height:7px;border-radius:50%;background:#E8611F}
-  .itin-note{margin-top:20px;background:#FFF1E8;border:1px dashed #E8611F;border-radius:12px;padding:14px 18px;font-size:14px;color:#1C3350}
-
-  .pkg-wrap{background:#211b17;color:#fff}
-  .pkg-wrap .section-head h2{color:#fff}
-  .pkg-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px;max-width:900px;margin:0 auto}
-  .pkg{background:#fff;color:#211b17;border:1px solid #e7e1d8;border-radius:18px;padding:30px;position:relative}
-  .pkg.featured{border:2px solid #E8611F;box-shadow:0 20px 50px rgba(232,97,31,.22)}
-  .ribbon{position:absolute;top:-13px;left:28px;background:#E8611F;color:#fff;font-weight:800;font-size:12px;padding:6px 14px;border-radius:20px;letter-spacing:.04em}
-  .pkg h3{font-size:22px;margin:0 0 4px;color:#122239}
-  .pkg-sub{color:#71675f;font-size:14px;margin:0 0 16px}
-  .pkg-amount{font:800 34px Georgia,serif;color:#122239;margin-bottom:18px}
-  .pkg-amount small{font-size:14px;color:#71675f;font-weight:400}
-  .pkg ul{list-style:none;margin:0 0 22px;padding:0}
-  .pkg li{padding:8px 0 8px 26px;position:relative;font-size:14.5px;border-bottom:1px solid #f3f0ea}
-  .pkg li:last-child{border-bottom:0}
-  .pkg li::before{content:'✓';position:absolute;left:0;color:#0E8F8A;font-weight:800}
-  .pkg li.no{color:#9a938c}
-  .pkg li.no::before{content:'×';color:#c0392b}
-  .pkg-btn{display:block;text-align:center;border-radius:40px;padding:14px}
-  .pkg-btn.ghost{background:transparent;color:#122239;border:2px solid #e7e1d8}
-  .pkg-btn.ghost:hover{border-color:#E8611F;color:#E8611F;background:transparent;transform:none}
-  .pkg-note{text-align:center;max-width:900px;margin:20px auto 0;font-size:13px;color:#c9beb5}
-
-  .form-section{background:#E8611F;color:white;padding:56px max(24px,calc((100vw - 1160px)/2));display:grid;grid-template-columns:.85fr 1.15fr;gap:44px;align-items:center}
-  .form-copy h2{font-size:clamp(34px,4.4vw,54px);line-height:1.02;letter-spacing:-.04em;margin:0;color:#fff}
-  .form-copy>p:not(.kicker){line-height:1.65;max-width:480px}
-  .quota{display:flex;align-items:center;gap:12px;border-top:1px solid rgba(255,255,255,.35);padding-top:20px;margin-top:28px}
-  .quota strong{font:72px Georgia,serif}
-  .quota span{font-size:13px;text-transform:uppercase;letter-spacing:.1em}
-  .lead-form{background:#fff;color:#211b17;padding:34px;box-shadow:14px 14px 0 #211b17}
-  .lead-form label{display:block;font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;margin-bottom:16px;color:#122239}
-  .lead-form input,.lead-form select{display:block;width:100%;padding:12px 0;border:0;border-bottom:1px solid #bfb5ab;background:#fff;font:16px Outfit,sans-serif;border-radius:0;margin-top:6px}
-  .lead-form select{padding:12px 4px}
-  .lead-form input:focus,.lead-form select:focus{outline:0;border-color:#E8611F;box-shadow:0 2px #E8611F}
-  .lead-form button{width:100%;font:800 15px Outfit,sans-serif;cursor:pointer;margin-top:8px;min-height:52px}
-  .lead-form button:disabled{opacity:.6;cursor:wait}
-  .lead-form small{display:block;text-align:center;color:#857a71;margin-top:14px}
-  .form-status{margin-top:12px;text-align:center;font-weight:700;font-size:14px}
-  .hidden{display:none}
-
-  .faq-list{max-width:820px;margin-left:auto}
-  .faq details{border-top:1px solid #cfc6bc}
-  .faq details:last-child{border-bottom:1px solid #cfc6bc}
-  .faq summary{padding:22px 0;list-style:none;cursor:pointer;font-size:17px;font-weight:700;display:flex;justify-content:space-between;color:#122239}
-  .faq summary::-webkit-details-marker{display:none}
-  .faq summary span::after{content:'+';font-size:24px;color:#E8611F}
-  .faq details[open] summary span::after{content:'−'}
-  .faq details p{margin:0;padding:0 45px 22px 0;color:#71675f;line-height:1.65}
-
-  footer{background:#171310;color:#b8ada5;padding:30px max(24px,calc((100vw - 1160px)/2));display:flex;align-items:center;gap:30px;font-size:12px}
-  footer img{filter:brightness(0) invert(1);opacity:.8}
-  footer p{margin-right:auto}
-  footer div{display:flex;gap:18px}
-  footer a{color:inherit;text-decoration:none}
-  footer a:hover{color:#E8611F}
-
-  :where(a,button,summary,input,select):focus-visible{outline:3px solid #c99a35;outline-offset:4px}
-
-  @media(max-width:800px){
-    .nav{padding-inline:18px}.nav img{width:142px}
-    .hero{grid-template-columns:1fr;padding:40px 20px 48px;gap:36px}.hero h1{font-size:40px}
-    .pass{box-shadow:10px 10px 0 #E8611F}
-    .proof{grid-template-columns:1fr 1fr;padding:0}.proof div:nth-child(2){border-right:0}.proof div{padding:20px}
-    .section{padding:44px 20px}
-    .section-head{grid-template-columns:1fr;margin-bottom:32px}
-    .reasons,.usp-grid,.dest-grid,.edu-grid,.itin-grid,.pkg-grid,.form-section{grid-template-columns:1fr}
-    .reasons article{padding:24px 0;border-right:0;border-bottom:1px solid #cfc6bc}
-    .reasons article:last-child{border-bottom:0}
-    .itin-grid article.full{grid-column:auto}
-    .banner-inner{flex-direction:column;text-align:center;padding:28px 20px}
-    .form-section{padding:44px 20px;gap:32px}.lead-form{padding:24px;box-shadow:8px 8px 0 #211b17}
-    footer{align-items:flex-start;flex-wrap:wrap}footer p{width:100%;order:3}
-    .actions{flex-direction:column;align-items:stretch}.secondary{border:0;padding-left:0;justify-content:flex-start}
-    .route strong{font-size:38px}
-  }
-  @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
-</style>
