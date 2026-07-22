@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import Footer from '../components/layout/Footer.astro';
 ---
 
 <BaseLayout
@@ -281,46 +282,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     </section>
 
     <!-- FOOTER -->
-    <footer class="jt-footer">
-      <div class="jt-foot-inner">
-        <div class="jt-foot-brand">
-          <div class="jt-logo-wrap" style="margin-bottom:8px;">
-            <svg class="jt-logo-svg"><use href="#jagatalk-logo"></use></svg>
-            <div>
-              <div class="jt-logo-text"><span class="jaga">jaga</span><span class="talk">talk</span></div>
-              <span class="jt-logo-sub" style="color:var(--jt-yellow);">by JAGATRIP</span>
-            </div>
-          </div>
-          <div class="jt-foot-tag">"Dunia Lebih Dekat."</div>
-          <p>Series webinar gratis dari JAGATRIP. Setiap minggu, dengar langsung dari yang sedang menjalani kuliah & hidup di luar negeri.</p>
-        </div>
-        <div class="jt-foot-col">
-          <h5>Daftar</h5>
-          <a href="#daftar">Webinar Terdekat</a>
-          <a href="#about">Tentang JAGATALK</a>
-          <a target="_blank" href="https://forms.gle/placeholder">Google Form</a>
-        </div>
-        <div class="jt-foot-col">
-          <h5>Kontak</h5>
-          <a target="_blank" href="https://wa.me/6281128506576">Admin JagaTalk: 0811-2850-6576</a>
-          <a href="mailto:pm@jagatrip.com">pm@jagatrip.com</a>
-        </div>
-        <div class="jt-foot-col">
-          <h5>Sosial</h5>
-          <a target="_blank" href="https://jagatrip.com/">jagatrip.com</a>
-          <a target="_blank" href="https://instagram.com/jagatrip.id">IG @jagatrip.id</a>
-          <a target="_blank" href="https://tiktok.com/@jagatrip.id">TikTok @jagatrip.id</a>
-        </div>
-      </div>
-      <div class="jt-foot-bot">
-        <div>© 2026 PT Jagatrip Mitra Edukasi. JAGATALK adalah series webinar dari JAGATRIP.</div>
-        <div class="jt-foot-social">
-          <a target="_blank" aria-label="Instagram" href="https://instagram.com/jagatrip.id">📷</a>
-          <a target="_blank" aria-label="TikTok" href="https://tiktok.com/@jagatrip.id">🎵</a>
-          <a target="_blank" aria-label="WhatsApp" href="https://wa.me/6281128506576">💬</a>
-        </div>
-      </div>
-    </footer>
+    <Footer />
 
   </main>
 </BaseLayout>
