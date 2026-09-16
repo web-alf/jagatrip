@@ -54,6 +54,31 @@ function ensureUtmHeaders(sheet, baseCols) {
   }
 }
 
+// ── Anti-Duplikasi WhatsApp: Normalisasi & Pemeriksaan Nomor WA ──────────
+function normalizePhone(phone) {
+  if (!phone) return '';
+  var clean = phone.toString().replace(/[^0-9]/g, '');
+  if (clean.indexOf('0') === 0) clean = '62' + clean.substring(1);
+  return clean;
+}
+
+// Cek apakah nomor WhatsApp sudah ada di kolom tertentu pada sheet terkait
+function isDuplicatePhone(sheet, colIndex, phone) {
+  if (!sheet || !phone) return false;
+  var target = normalizePhone(phone);
+  if (!target) return false;
+  var lastRow = sheet.getLastRow();
+  if (lastRow < 2) return false;
+  var values = sheet.getRange(2, colIndex, lastRow - 1, 1).getValues();
+  for (var i = 0; i < values.length; i++) {
+    var existing = normalizePhone(values[i][0]);
+    if (existing && existing === target) {
+      return true;
+    }
+  }
+  return false;
+}
+
 // ═══════════════════════════════════════════════════════════════════════
 // SETUP — Jalankan SEKALI (Hanya jika membuat sheet baru dari nol)
 // ═══════════════════════════════════════════════════════════════════════
@@ -363,12 +388,20 @@ function handlePendaftaran(ss, data) {
   var sheet = ss.getSheetByName(SHEET_NAME);
   if (!sheet) sheet = ss.getActiveSheet();
   ensureUtmHeaders(sheet, HEADERS.length);
+
+  var wa = data.wa || data.whatsapp || '';
+  if (isDuplicatePhone(sheet, 5, wa)) {
+    return ContentService
+      .createTextOutput(JSON.stringify({ status: 'duplicate', sheet: SHEET_NAME, message: 'Nomor WhatsApp sudah pernah terdaftar' }))
+      .setMimeType(ContentService.MimeType.JSON);
+  }
+
   var lastRow = sheet.getLastRow();
   var no = lastRow <= 1 ? 1 : lastRow;
   sheet.appendRow([
     no,
     data.timestamp ? new Date(data.timestamp) : new Date(),
-    data.nama || '', data.email || '', data.wa || '',
+    data.nama || '', data.email || '', wa,
     data.jabatan || '', data.sekolah || '', data.kota_asal || '',
     data.kota_berangkat || '', data.program || '', data.peserta || '',
     data.catatan || '', 'Baru', data.source || '',
@@ -386,6 +419,14 @@ function handleRegistrasi(ss, data) {
     sheet = ss.getSheetByName(REG_SHEET_NAME);
   }
   ensureUtmHeaders(sheet, REG_HEADERS.length);
+
+  var wa = data.wa || data.whatsapp || '';
+  if (isDuplicatePhone(sheet, 6, wa)) {
+    return ContentService
+      .createTextOutput(JSON.stringify({ status: 'duplicate', sheet: REG_SHEET_NAME, message: 'Nomor WhatsApp sudah pernah terdaftar' }))
+      .setMimeType(ContentService.MimeType.JSON);
+  }
+
   var lastRow = sheet.getLastRow();
   var no = lastRow <= 1 ? 1 : lastRow;
   var linkPaspor = saveFile(data.file_paspor, 'paspor_' + (data.nama_lengkap || no) + '_' + (data.file_paspor_name || 'file'), data.file_paspor_type || 'image/jpeg');
@@ -395,7 +436,7 @@ function handleRegistrasi(ss, data) {
     no,
     data.timestamp ? new Date(data.timestamp) : new Date(),
     data.nama_lengkap || '', data.nama_panggilan || '', data.alamat || '',
-    data.wa || '', data.email || '',
+    wa, data.email || '',
     data.no_paspor || '', data.expired_paspor || '',
     linkPaspor, linkKtp,
     data.kota_asal || '', data.bandara || '', data.punya_tiket || '',
@@ -449,6 +490,14 @@ function handleJagatalk8(ss, sheetName, data) {
   }
 
   ensureUtmHeaders(sheet, BASE_HEADERS.length);
+
+  var wa = data.wa || data.whatsapp || data.nomor_wa || '';
+  if (isDuplicatePhone(sheet, 5, wa)) {
+    return ContentService
+      .createTextOutput(JSON.stringify({ status: 'duplicate', sheet: sheetName, message: 'Nomor WhatsApp sudah pernah terdaftar' }))
+      .setMimeType(ContentService.MimeType.JSON);
+  }
+
   var lastRow = sheet.getLastRow();
   var no = lastRow <= 1 ? 1 : lastRow;
   sheet.appendRow([
@@ -456,7 +505,7 @@ function handleJagatalk8(ss, sheetName, data) {
     data.timestamp ? new Date(data.timestamp) : new Date(),
     data.nama || data.nama_lengkap || '',
     data.institusi || data.instansi || data.asal_lembaga || data.domisili || data.asal || '',
-    data.wa || data.whatsapp || data.nomor_wa || '',
+    wa,
     data.paket || 'Regular',
     'Baru',
     data.source || 'JAGATALK #8 Landing Page (/jagatalk8)',
@@ -494,6 +543,14 @@ function handleBatch2(ss, sheetName, data) {
   }
 
   ensureUtmHeaders(sheet, BASE_HEADERS.length);
+
+  var wa = data.wa || data.whatsapp || '';
+  if (isDuplicatePhone(sheet, 5, wa)) {
+    return ContentService
+      .createTextOutput(JSON.stringify({ status: 'duplicate', sheet: sheetName, message: 'Nomor WhatsApp sudah pernah terdaftar' }))
+      .setMimeType(ContentService.MimeType.JSON);
+  }
+
   var lastRow = sheet.getLastRow();
   var no = lastRow <= 1 ? 1 : lastRow;
   sheet.appendRow([
@@ -501,7 +558,7 @@ function handleBatch2(ss, sheetName, data) {
     data.timestamp ? new Date(data.timestamp) : new Date(),
     data.nama || '',
     data.institusi || data.instansi || data.sekolah || data.domisili || data.asal || '',
-    data.wa || data.whatsapp || '',
+    wa,
     'Baru',
     data.source || '',
   ].concat(utmValues(data)));
@@ -528,13 +585,21 @@ function handleBatch3(ss, sheetName, data) {
     sheet.setRowHeight(1, 36);
   }
   ensureUtmHeaders(sheet, BASE_HEADERS.length);
+
+  var wa = data.wa || data.whatsapp || '';
+  if (isDuplicatePhone(sheet, 4, wa)) {
+    return ContentService
+      .createTextOutput(JSON.stringify({ status: 'duplicate', sheet: sheetName, message: 'Nomor WhatsApp sudah pernah terdaftar' }))
+      .setMimeType(ContentService.MimeType.JSON);
+  }
+
   var lastRow = sheet.getLastRow();
   var no = lastRow <= 1 ? 1 : lastRow;
   sheet.appendRow([
     no,
     data.timestamp ? new Date(data.timestamp) : new Date(),
     data.nama || '',
-    data.wa || '',
+    wa,
     data.instansi || '',
     data.domisili || '',
     data.paket || '',
@@ -563,6 +628,14 @@ function handleChina(ss, sheetName, data) {
     sheet.setRowHeight(1, 36);
   }
   ensureUtmHeaders(sheet, BASE_HEADERS.length);
+
+  var wa = data.wa || data.whatsapp || '';
+  if (isDuplicatePhone(sheet, 5, wa)) {
+    return ContentService
+      .createTextOutput(JSON.stringify({ status: 'duplicate', sheet: sheetName, message: 'Nomor WhatsApp sudah pernah terdaftar' }))
+      .setMimeType(ContentService.MimeType.JSON);
+  }
+
   var lastRow = sheet.getLastRow();
   var no = lastRow <= 1 ? 1 : lastRow;
   sheet.appendRow([
@@ -570,7 +643,7 @@ function handleChina(ss, sheetName, data) {
     data.timestamp ? new Date(data.timestamp) : new Date(),
     data.nama || '',
     data.asal || '',
-    data.wa || '',
+    wa,
     'Baru',
     data.source || '',
   ].concat(utmValues(data)));
@@ -596,13 +669,21 @@ function handleGenericLead(ss, sheetName, data) {
     sheet.setRowHeight(1, 36);
   }
   ensureUtmHeaders(sheet, BASE_HEADERS.length);
+
+  var wa = data.wa || data.whatsapp || '';
+  if (isDuplicatePhone(sheet, 4, wa)) {
+    return ContentService
+      .createTextOutput(JSON.stringify({ status: 'duplicate', sheet: sheetName, message: 'Nomor WhatsApp sudah pernah terdaftar' }))
+      .setMimeType(ContentService.MimeType.JSON);
+  }
+
   var lastRow = sheet.getLastRow();
   var no = lastRow <= 1 ? 1 : lastRow;
   sheet.appendRow([
     no,
     data.timestamp ? new Date(data.timestamp) : new Date(),
     data.nama || '',
-    data.wa || '',
+    wa,
     data.email || '',
     data.jabatan || '',
     data.sekolah || data.instansi || '',
@@ -616,7 +697,24 @@ function handleGenericLead(ss, sheetName, data) {
     .setMimeType(ContentService.MimeType.JSON);
 }
 
-function doGet() {
+function doGet(e) {
+  if (e && e.parameter && e.parameter.action === 'check_phone') {
+    var ss = SpreadsheetApp.getActiveSpreadsheet();
+    var sheetName = e.parameter.sheet || SHEET_NAME;
+    var sheet = ss.getSheetByName(sheetName);
+    var col = parseInt(e.parameter.col || '5', 10);
+    var phone = e.parameter.phone || e.parameter.wa || '';
+    var dup = sheet ? isDuplicatePhone(sheet, col, phone) : false;
+    return ContentService
+      .createTextOutput(JSON.stringify({
+        status: 'ok',
+        sheet: sheetName,
+        phone: normalizePhone(phone),
+        is_duplicate: dup
+      }))
+      .setMimeType(ContentService.MimeType.JSON);
+  }
+
   return ContentService
     .createTextOutput(JSON.stringify({
       status: 'ok',

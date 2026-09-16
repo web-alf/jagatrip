@@ -253,11 +253,14 @@ import Footer from '../components/layout/Footer.astro';
 <script>
   import { SITE } from '../data/site';
   import { getUtm } from '../lib/utm';
+  import { initFormGuard, lockForm, isPhoneSubmitted } from '../lib/form-guard';
 
   const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwrwCUYnuIUCflczefMlYAHdCnOD-5PMqVEL94QTPWy6Hkds6SiOQLfyo7PZpVoqtjiZg/exec';
 
   const form = document.getElementById('lp-nf-form') as HTMLFormElement | null;
   if (form) {
+    initFormGuard(form, 'lp-nf-form', '✓ Anda sudah mengirim pendaftaran pada perangkat ini.');
+
     const btn = form.querySelector('button')!;
     const status = document.getElementById('lp-nf-status')!;
 
@@ -274,6 +277,8 @@ import Footer from '../components/layout/Footer.astro';
         return;
       }
 
+      const isDuplicate = isPhoneSubmitted('lp-nf-form', payload.wa);
+
       btn.disabled = true; btn.textContent = '⏳ Mengirim...';
 
       fetch(APPS_SCRIPT_URL, {
@@ -284,10 +289,15 @@ import Footer from '../components/layout/Footer.astro';
       if ((window as any).fbq) { (window as any).fbq('track', 'Lead'); }
       if ((window as any).ttq) { (window as any).ttq.track('CompleteRegistration'); }
 
-      const msg = `Halo JAGATRIP! 👋\n\nSaya ${payload.nama}.\nSaya tertarik daftar Edutrip Malaysia-Thailand Juni 2026.\n(Dari halaman: LP Nonformal)\n\nMohon info lebih lanjut. Terima kasih!`;
+      lockForm(form, 'lp-nf-form', isDuplicate ? '✓ Anda sudah terdaftar sebelumnya. Mengalihkan ke WhatsApp...' : '✓ Terkirim! Mengalihkan ke WhatsApp...', payload.wa);
+
+      const msg = isDuplicate
+        ? `Halo JAGATRIP! 👋\n\nSaya ${payload.nama}.\nSebelumnya saya sudah mendaftar Edutrip Malaysia-Thailand dengan nomor ini, ingin konfirmasi status pendaftaran saya. Terima kasih!`
+        : `Halo JAGATRIP! 👋\n\nSaya ${payload.nama}.\nSaya tertarik daftar Edutrip Malaysia-Thailand Juni 2026.\n(Dari halaman: LP Nonformal)\n\nMohon info lebih lanjut. Terima kasih!`;
+
       setTimeout(() => {
         window.location.href = `https://wa.me/${SITE.waNumber}?text=${encodeURIComponent(msg)}`;
-      }, 300);
+      }, 400);
     });
   }
 </script>

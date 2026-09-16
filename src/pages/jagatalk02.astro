@@ -1250,7 +1250,7 @@ import Footer from '../components/layout/Footer.astro';
 
 <script>
   import { getUtm } from '../lib/utm';
-  import { initFormGuard, lockForm } from '../lib/form-guard';
+  import { initFormGuard, lockForm, isPhoneSubmitted } from '../lib/form-guard';
   import { parseIndonesianPhone } from '../lib/phone-formatter';
 
   document.addEventListener('DOMContentLoaded', () => {
@@ -1281,6 +1281,7 @@ import Footer from '../components/layout/Footer.astro';
 
         const parsedPhone = parseIndonesianPhone(rawWa);
         const wa = parsedPhone.e164 || rawWa;
+        const isDuplicate = isPhoneSubmitted('jagatalk02-form', wa);
         
         if (btn) {
           btn.disabled = true;
@@ -1291,7 +1292,9 @@ import Footer from '../components/layout/Footer.astro';
         const selectedAdmin = admins[Math.floor(Math.random() * admins.length)];
         
         // Custom greeting message format (includes instansi for admin context):
-        const greeting = `Hai admin Jagatalk, saya ${nama} dari ${instansi} telah mengisi form pendaftaran JAGATALK Episode 02. Bagaimana langkah selanjutnya?`;
+        const greeting = isDuplicate
+          ? `Hai admin Jagatalk, saya ${nama} dari ${instansi} sebelumnya sudah mendaftar JAGATALK Episode 02 dengan nomor ini, ingin konfirmasi status pendaftaran saya.`
+          : `Hai admin Jagatalk, saya ${nama} dari ${instansi} telah mengisi form pendaftaran JAGATALK Episode 02. Bagaimana langkah selanjutnya?`;
         const waUrl = `https://wa.me/${selectedAdmin}?text=${encodeURIComponent(greeting)}`;
         
         const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwrwCUYnuIUCflczefMlYAHdCnOD-5PMqVEL94QTPWy6Hkds6SiOQLfyo7PZpVoqtjiZg/exec';
@@ -1326,9 +1329,9 @@ import Footer from '../components/layout/Footer.astro';
           }
         }
         
-        showStatus('success', 'Pendaftaran berhasil! Mengalihkan ke WhatsApp...');
+        showStatus('success', isDuplicate ? 'Sudah terdaftar sebelumnya. Mengalihkan ke WhatsApp...' : 'Pendaftaran berhasil! Mengalihkan ke WhatsApp...');
 
-        lockForm(form, 'jagatalk02-form');
+        lockForm(form, 'jagatalk02-form', isDuplicate ? '✓ Anda sudah terdaftar sebelumnya.' : '✓ Pendaftaran berhasil dikirim.', wa);
         setTimeout(() => {
           window.location.href = waUrl;
         }, 500);

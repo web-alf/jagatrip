@@ -238,11 +238,14 @@ const waPromo = `https://wa.me/${SITE.waNumber}?text=${encodeURIComponent('Halo 
 <script>
   import { SITE } from '../data/site';
   import { getUtm } from '../lib/utm';
+  import { initFormGuard, lockForm, isPhoneSubmitted } from '../lib/form-guard';
 
   const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwrwCUYnuIUCflczefMlYAHdCnOD-5PMqVEL94QTPWy6Hkds6SiOQLfyo7PZpVoqtjiZg/exec';
 
   const form = document.getElementById('lp2-promo-form') as HTMLFormElement | null;
   if (form) {
+    initFormGuard(form, 'lp2-promo-form', '✓ Anda sudah mengirim pendaftaran promo ini pada perangkat ini.');
+
     const btn = form.querySelector('button')!;
     const status = document.getElementById('lp2-promo-status')!;
 
@@ -259,6 +262,8 @@ const waPromo = `https://wa.me/${SITE.waNumber}?text=${encodeURIComponent('Halo 
         return;
       }
 
+      const isDuplicate = isPhoneSubmitted('lp2-promo-form', payload.wa);
+
       btn.disabled = true; btn.textContent = '⏳ Mengirim...';
 
       fetch(APPS_SCRIPT_URL, {
@@ -268,10 +273,15 @@ const waPromo = `https://wa.me/${SITE.waNumber}?text=${encodeURIComponent('Halo 
 
       if ((window as any).fbq) { (window as any).fbq('track', 'Lead'); }
 
-      const msg = `Halo JAGATRIP! 👋\n\nSaya ${payload.nama}, tertarik daftar Edutrip Malaysia-Thailand Juni 2026.\n(Dari halaman: LP Promo)\n\nMohon konfirmasi pendaftaran saya. Terima kasih!`;
+      lockForm(form, 'lp2-promo-form', isDuplicate ? '✓ Anda sudah terdaftar sebelumnya. Mengalihkan ke WhatsApp...' : '✓ Terkirim! Mengalihkan ke WhatsApp...', payload.wa);
+
+      const msg = isDuplicate
+        ? `Halo JAGATRIP! 👋\n\nSaya ${payload.nama}, sebelumnya sudah mendaftar Edutrip Malaysia-Thailand dengan nomor ini, ingin konfirmasi status pendaftaran saya. Terima kasih!`
+        : `Halo JAGATRIP! 👋\n\nSaya ${payload.nama}, tertarik daftar Edutrip Malaysia-Thailand Juni 2026.\n(Dari halaman: LP Promo)\n\nMohon konfirmasi pendaftaran saya. Terima kasih!`;
+
       setTimeout(() => {
         window.location.href = `https://wa.me/${SITE.waNumber}?text=${encodeURIComponent(msg)}`;
-      }, 300);
+      }, 400);
     });
   }
 </script>

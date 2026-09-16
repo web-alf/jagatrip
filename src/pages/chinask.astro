@@ -339,7 +339,7 @@ const snkSections = [
 
 <script>
   import { getUtm } from '../lib/utm';
-  import { initFormGuard, lockForm } from '../lib/form-guard';
+  import { initFormGuard, lockForm, isPhoneSubmitted } from '../lib/form-guard';
   import { parseIndonesianPhone } from '../lib/phone-formatter';
 
   const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwrwCUYnuIUCflczefMlYAHdCnOD-5PMqVEL94QTPWy6Hkds6SiOQLfyo7PZpVoqtjiZg/exec';
@@ -370,6 +370,7 @@ const snkSections = [
 
       const parsedPhone = parseIndonesianPhone(rawWa);
       const wa = parsedPhone.e164 || rawWa;
+      const isDuplicate = isPhoneSubmitted('chinask-form', wa);
 
       if (btn) { btn.disabled = true; btn.textContent = 'Memproses...'; }
 
@@ -387,10 +388,12 @@ const snkSections = [
       const win = window as any;
       if (win.fbq) { try { win.fbq('track', 'Lead', { content_name: 'S&K China' }); } catch (e) { console.error(e); } }
 
-      const greeting = `Hai Admin, saya sudah baca S&K dan sudah isi form. Selanjutnya bagaimana?\n\nNama: ${nama}\nDomisili: ${domisili}\nNo. WA: ${wa}`;
+      const greeting = isDuplicate
+        ? `Hai Admin, saya sudah baca S&K dan sebelumnya sudah mendaftar dengan nomor ini, ingin konfirmasi kelanjutan proses pendaftaran.\n\nNama: ${nama}\nDomisili: ${domisili}\nNo. WA: ${wa}`
+        : `Hai Admin, saya sudah baca S&K dan sudah isi form. Selanjutnya bagaimana?\n\nNama: ${nama}\nDomisili: ${domisili}\nNo. WA: ${wa}`;
       const waUrl = `https://wa.me/${WA_ADMIN}?text=${encodeURIComponent(greeting)}`;
-      showStatus('ok', 'Berhasil! Mengalihkan ke WhatsApp...');
-      lockForm(form, 'chinask-form');
+      showStatus('ok', isDuplicate ? 'Sudah terdaftar sebelumnya. Mengalihkan ke WhatsApp...' : 'Berhasil! Mengalihkan ke WhatsApp...');
+      lockForm(form, 'chinask-form', isDuplicate ? '✓ Anda sudah terdaftar sebelumnya.' : '✓ Data Anda sudah terkirim.', wa);
       setTimeout(() => { window.location.href = waUrl; }, 500);
     });
   });

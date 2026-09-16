@@ -60,7 +60,7 @@ import { chinaEventSchema, chinaProgram as p } from '../data/china';
 
   <script>
     import { getUtm } from '../lib/utm';
-    import { initFormGuard, lockForm } from '../lib/form-guard';
+    import { initFormGuard, lockForm, isPhoneSubmitted } from '../lib/form-guard';
     import { parseIndonesianPhone } from '../lib/phone-formatter';
     const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwrwCUYnuIUCflczefMlYAHdCnOD-5PMqVEL94QTPWy6Hkds6SiOQLfyo7PZpVoqtjiZg/exec';
     const cform=document.querySelector<HTMLFormElement>('[data-china-form]');
@@ -70,14 +70,17 @@ import { chinaEventSchema, chinaProgram as p } from '../data/china';
       const data=new FormData(form), nama=String(data.get('nama')).trim(), asal=String(data.get('asal')).trim(), rawWa=String(data.get('whatsapp')).trim();
       const parsedPhone = parseIndonesianPhone(rawWa);
       const wa = parsedPhone.e164 || rawWa;
+      const isDuplicate = isPhoneSubmitted('china2-form', wa);
       fetch(APPS_SCRIPT_URL, {
         method: 'POST', mode: 'no-cors',
         body: JSON.stringify({ _sheet: 'China2', nama, asal, wa, ...getUtm(), timestamp: new Date().toISOString(), source: window.location.href }),
       }).catch(() => {});
       if (typeof (window as any).fbq === 'function') (window as any).fbq('track', 'Lead', { content_name: 'China2' });
-      const message=`Halo Admin, saya ${nama} dari ${asal} tertarik ikut Jagatrip ke China dan sudah mengisi form. Nomor WhatsApp saya ${whatsapp}. Bagaimana selanjutnya?`;
+      const message=isDuplicate
+        ? `Halo Admin, saya ${nama} dari ${asal} sebelumnya sudah mendaftar Jagatrip ke China dengan nomor ini, ingin konfirmasi kelanjutan pendaftaran.`
+        : `Halo Admin, saya ${nama} dari ${asal} tertarik ikut Jagatrip ke China dan sudah mengisi form. Nomor WhatsApp saya ${parsedPhone.display || wa}. Bagaimana selanjutnya?`;
       const cs=['628139190363','6281128506576'], nomor=cs[Math.floor(Math.random()*cs.length)];
-      lockForm(form,'china2-form');
+      lockForm(form,'china2-form', isDuplicate ? '✓ Anda sudah terdaftar sebelumnya. Mengalihkan ke WhatsApp...' : '✓ Data Anda sudah terkirim. Mengalihkan ke WhatsApp...', wa);
       setTimeout(() => { location.href=`https://wa.me/${nomor}?text=${encodeURIComponent(message)}`; }, 300);
     })}
   </script>

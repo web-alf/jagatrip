@@ -1,6 +1,6 @@
 import { SITE } from '../data/site';
 import { getUtm } from './utm';
-import { initFormGuard, lockForm } from './form-guard';
+import { initFormGuard, lockForm, isPhoneSubmitted } from './form-guard';
 import { parseIndonesianPhone } from './phone-formatter';
 import { validatePhoneInput } from './form-enhancer';
 
@@ -160,11 +160,15 @@ export function initRegisterForm(): void {
       showProgress(5);
       if (window.fbq) window.fbq('track', 'CompleteRegistration');
 
+      const isDuplicate = isPhoneSubmitted('register-form', payload.wa);
+
       // Build WA message & redirect
       const msg = [
         'Halo admin JAGATRIP 👋',
         '',
-        'Saya sudah mengisi *Form Registrasi Ulang* di website.',
+        isDuplicate
+          ? 'Saya sebelumnya sudah mengisi *Form Registrasi* dengan nomor ini, ingin konfirmasi status berkas saya.'
+          : 'Saya sudah mengisi *Form Registrasi* di website.',
         '',
         '📋 Data saya:',
         `Nama: ${payload.nama_lengkap}`,
@@ -179,7 +183,7 @@ export function initRegisterForm(): void {
       ].join('\n');
 
       await sleep(1000);
-      lockForm(form, 'register-form');
+      lockForm(form, 'register-form', isDuplicate ? '✓ Anda sudah terdaftar sebelumnya.' : '✓ Registrasi berhasil dikirim.', payload.wa);
       window.location.href = `https://wa.me/${SITE.waNumber}?text=${encodeURIComponent(msg)}`;
 
     } catch {

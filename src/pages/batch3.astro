@@ -447,6 +447,7 @@ import { SITE } from '../data/site';
   <script>
     import { SITE } from '../data/site';
     import { getUtm } from '../lib/utm';
+    import { initFormGuard, lockForm, isPhoneSubmitted } from '../lib/form-guard';
 
     const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwrwCUYnuIUCflczefMlYAHdCnOD-5PMqVEL94QTPWy6Hkds6SiOQLfyo7PZpVoqtjiZg/exec';
 
@@ -461,6 +462,9 @@ import { SITE } from '../data/site';
 
     const form = document.getElementById('batch3-form') as HTMLFormElement | null;
     if (form) {
+      // Inisialisasi pengaman: kunci form jika browser ini sudah pernah submit
+      initFormGuard(form, 'batch3-form', '✓ Anda sudah mengirim pendaftaran JAGATRIP #3 pada perangkat ini. Tim kami akan segera menghubungi Anda.');
+
       const btn = form.querySelector<HTMLButtonElement>('button[type="submit"]')!;
       const status = document.getElementById('batch3-status')!;
 
@@ -479,6 +483,8 @@ import { SITE } from '../data/site';
           return;
         }
 
+        const isDuplicate = isPhoneSubmitted('batch3-form', payload.wa);
+
         btn.disabled = true;
         btn.textContent = '⏳ Mengirim...';
 
@@ -490,10 +496,16 @@ import { SITE } from '../data/site';
         if ((window as any).fbq) { (window as any).fbq('track', 'Lead'); }
         if ((window as any).ttq) { (window as any).ttq.track('CompleteRegistration'); }
 
-        const msg = `Halo Admin JAGATRIP! 👋\n\nSaya ${payload.nama} dari ${payload.instansi} (${payload.domisili}).\nSaya ingin mendaftar JAGATRIP #3 (Malaysia–Thailand–Singapura).\nPaket: ${payload.paket}\nNo. WhatsApp: ${payload.wa}\n\nMohon info langkah selanjutnya. Terima kasih!`;
+        // Kunci form dan catat nomor WA
+        lockForm(form, 'batch3-form', isDuplicate ? '✓ Anda sudah terdaftar sebelumnya. Mengalihkan ke WhatsApp...' : '✓ Pendaftaran berhasil! Mengalihkan ke WhatsApp...', payload.wa);
+
+        const msg = isDuplicate
+          ? `Halo Admin JAGATRIP! 👋\n\nSaya ${payload.nama} dari ${payload.instansi} (${payload.domisili}).\nSebelumnya saya sudah mendaftar JAGATRIP #3 dengan nomor ini, ingin konfirmasi kelanjutan pendaftaran. Terima kasih!`
+          : `Halo Admin JAGATRIP! 👋\n\nSaya ${payload.nama} dari ${payload.instansi} (${payload.domisili}).\nSaya ingin mendaftar JAGATRIP #3 (Malaysia–Thailand–Singapura).\nPaket: ${payload.paket}\nNo. WhatsApp: ${payload.wa}\n\nMohon info langkah selanjutnya. Terima kasih!`;
+
         setTimeout(() => {
           window.location.href = `https://wa.me/${SITE.waNumber}?text=${encodeURIComponent(msg)}`;
-        }, 300);
+        }, 400);
       });
     }
   </script>

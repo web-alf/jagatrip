@@ -249,7 +249,7 @@ const faqs = [
 
 <script>
   import { getUtm } from '../lib/utm';
-  import { initFormGuard, lockForm } from '../lib/form-guard';
+  import { initFormGuard, lockForm, isPhoneSubmitted } from '../lib/form-guard';
   import { parseIndonesianPhone } from '../lib/phone-formatter';
 
   document.addEventListener('DOMContentLoaded', () => {
@@ -286,11 +286,14 @@ const faqs = [
 
       const parsedPhone = parseIndonesianPhone(rawWa);
       const wa = parsedPhone.e164 || rawWa;
+      const isDuplicate = isPhoneSubmitted('jagatalk-premium-form', wa);
 
       if (btn) { btn.disabled = true; btn.textContent = 'Memproses...'; }
 
       const selectedAdmin = admins[Math.floor(Math.random() * admins.length)];
-      const greeting = `Hai admin JAGATALK Premium, saya ${nama} dari ${instansi} (${domisili}) telah mengisi form pendaftaran webinar JAGATALK Premium (Rp 39.000). Bagaimana langkah pembayaran selanjutnya?`;
+      const greeting = isDuplicate
+        ? `Hai admin JAGATALK Premium, saya ${nama} dari ${instansi} (${domisili}) sebelumnya sudah mendaftar dengan nomor ini, ingin konfirmasi langkah selanjutnya.`
+        : `Hai admin JAGATALK Premium, saya ${nama} dari ${instansi} (${domisili}) telah mengisi form pendaftaran webinar JAGATALK Premium (Rp 39.000). Bagaimana langkah pembayaran selanjutnya?`;
       const waUrl = `https://wa.me/${selectedAdmin}?text=${encodeURIComponent(greeting)}`;
 
       try {
@@ -318,8 +321,8 @@ const faqs = [
         try { win.fbq('track', 'Lead', { content_name: 'Jagatalk Premium' }); } catch (e) { console.error('FB Pixel error:', e); }
       }
 
-      showStatus('ok', 'Pendaftaran berhasil! Mengalihkan ke WhatsApp...');
-      lockForm(form, 'jagatalk-premium-form');
+      showStatus('ok', isDuplicate ? 'Sudah terdaftar sebelumnya. Mengalihkan ke WhatsApp...' : 'Pendaftaran berhasil! Mengalihkan ke WhatsApp...');
+      lockForm(form, 'jagatalk-premium-form', isDuplicate ? '✓ Anda sudah terdaftar sebelumnya.' : '✓ Pendaftaran berhasil dikirim.', wa);
       setTimeout(() => { window.location.href = waUrl; }, 500);
     });
   });

@@ -534,7 +534,7 @@ import Footer from '../components/layout/Footer.astro';
 
 <script>
   import { getUtm } from '../lib/utm';
-  import { initFormGuard, lockForm } from '../lib/form-guard';
+  import { initFormGuard, lockForm, isPhoneSubmitted } from '../lib/form-guard';
   import { parseIndonesianPhone } from '../lib/phone-formatter';
 
   document.addEventListener('DOMContentLoaded', () => {
@@ -574,9 +574,14 @@ import Footer from '../components/layout/Footer.astro';
         btn.textContent = 'Memproses...';
       }
 
+      // Check phone duplicate
+      const isDuplicate = isPhoneSubmitted('webinar-form', wa);
+
       // Load balance between the two WhatsApp admin numbers
       const selectedAdmin = admins[Math.floor(Math.random() * admins.length)];
-      const greeting = `Hai admin JAGATALK, saya ${nama} dari ${instansi} telah mengisi form pendaftaran webinar JAGATALK. Bagaimana langkah selanjutnya?`;
+      const greeting = isDuplicate
+        ? `Halo Admin JAGATALK, saya ${nama} dari ${instansi} sebelumnya sudah mendaftar webinar JAGATALK dengan nomor ini, ingin konfirmasi status pendaftaran saya.`
+        : `Hai admin JAGATALK, saya ${nama} dari ${instansi} telah mengisi form pendaftaran webinar JAGATALK. Bagaimana langkah selanjutnya?`;
       const waUrl = `https://wa.me/${selectedAdmin}?text=${encodeURIComponent(greeting)}`;
 
       try {
@@ -603,8 +608,8 @@ import Footer from '../components/layout/Footer.astro';
         try { win.fbq('track', 'Lead'); } catch (e) { console.error('FB Pixel error:', e); }
       }
 
-      showStatus('ok', 'Pendaftaran berhasil! Mengalihkan ke WhatsApp...');
-      lockForm(form, 'webinar-form');
+      showStatus('ok', isDuplicate ? 'Data Anda sudah terdaftar sebelumnya. Mengalihkan ke WhatsApp...' : 'Pendaftaran berhasil! Mengalihkan ke WhatsApp...');
+      lockForm(form, 'webinar-form', undefined, wa);
       setTimeout(() => { window.location.href = waUrl; }, 500);
     });
   });

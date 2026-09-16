@@ -1,6 +1,6 @@
 import { SITE } from '../data/site';
 import { getUtm } from './utm';
-import { initFormGuard, lockForm } from './form-guard';
+import { initFormGuard, lockForm, isPhoneSubmitted } from './form-guard';
 import { parseIndonesianPhone } from './phone-formatter';
 import { validatePhoneInput } from './form-enhancer';
 
@@ -37,20 +37,30 @@ export function initRegistrationForm(): void {
 
     const parsedPhone = parseIndonesianPhone(payload.wa || '');
     payload.wa = parsedPhone.e164 || payload.wa;
+    const isDuplicate = isPhoneSubmitted('daftar-form', payload.wa);
 
     if (btn) {
       btn.disabled = true;
       btn.textContent = 'Mengirim...';
     }
 
-    const msg = [
-      `Halo admin JAGATRIP! 👋`,
-      ``,
-      `Saya ${payload.nama}, tertarik dengan program JAGATRIP.`,
-      `(Dari halaman: Company Profile)`,
-      ``,
-      `Mohon info detail program & pendaftaran. Terima kasih! 🙏`,
-    ].join('\n');
+    const msg = isDuplicate
+      ? [
+          `Halo admin JAGATRIP! 👋`,
+          ``,
+          `Saya ${payload.nama}, sebelumnya sudah mendaftar/konsultasi program JAGATRIP dengan nomor ini.`,
+          `(Dari halaman: Company Profile)`,
+          ``,
+          `Ingin konfirmasi kelanjutan prosesnya. Terima kasih! 🙏`,
+        ].join('\n')
+      : [
+          `Halo admin JAGATRIP! 👋`,
+          ``,
+          `Saya ${payload.nama}, tertarik dengan program JAGATRIP.`,
+          `(Dari halaman: Company Profile)`,
+          ``,
+          `Mohon info detail program & pendaftaran. Terima kasih! 🙏`,
+        ].join('\n');
 
     const waUrl = `https://wa.me/${SITE.waNumber}?text=${encodeURIComponent(msg)}`;
 
@@ -70,8 +80,8 @@ export function initRegistrationForm(): void {
 
     if (window.fbq) { window.fbq('track', 'Lead'); }
 
-    // Kunci form agar tidak bisa diisi lagi
-    lockForm(form, 'daftar-form');
+    // Kunci form dan catat nomor WA
+    lockForm(form, 'daftar-form', isDuplicate ? '✓ Anda sudah terdaftar sebelumnya. Mengalihkan ke WhatsApp...' : '✓ Data Anda sudah terkirim. Mengalihkan ke WhatsApp...', payload.wa);
 
     // Redirect ke WA (delay 300ms biar pixel sempat fire)
     setTimeout(() => {
